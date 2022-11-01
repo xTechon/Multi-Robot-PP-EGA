@@ -60,6 +60,26 @@ int main(int, char **) {
     ImGui::NewFrame();
 
     // windows here
+    // simple window
+    {
+      static float f = 0.0f;
+      static int counter = 0;
+      ImGui::Begin("Hello world!");
+      ImGui::Text("Some usefule text.");
+      ImGui::Checkbox("Another Window", &show_another_window);
+
+      ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+      ImGui::ColorEdit3("clear color", (float *)&clear_color);
+      ImGui::End();
+    }
+
+    if (show_another_window) {
+      ImGui::Begin("Another Window", &show_another_window);
+      ImGui::Text("Hi Another Window, I'm Dad!");
+      if (ImGui::Button("Close Me"))
+        show_another_window = false;
+      ImGui::End();
+    }
 
     // Rendering
     ImGui::Render();
