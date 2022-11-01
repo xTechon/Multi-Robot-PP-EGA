@@ -17,8 +17,8 @@ set(SOURCES ${C_SOURCES} ${CPP_SOURCES})
 include(FetchContent)
 FetchContent_Declare(
   imgui
-  URL https://github.com/ocornut/imgui/archive/refs/heads/master.tar.gz
   DOWNLOAD_EXTRACT_TIMESTAMP OFF
+  URL "https://github.com/ocornut/imgui/archive/refs/heads/master.tar.gz"
 )
 FetchContent_MakeAvailable(imgui)
 
@@ -40,14 +40,15 @@ if (NOT TARGET imgui)
 endif()
 
 #check for libraries
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(FMT REQUIRED fmt)
+find_package(fmt REQUIRED)
+#find_package(PkgConfig REQUIRED)
+#pkg_check_modules(FMT REQUIRED fmt)
 
 set (LIBRARIES
   imgui
   imgui-glfw
   imgui-opengl3
-  ${FMT_LIBRARIES}
+  fmt::fmt
 )
 
 #optional Catch2 for unit testing
