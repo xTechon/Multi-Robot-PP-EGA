@@ -11,7 +11,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
 
 # Get C or C++ sources in the current directory (only).
 file(GLOB CPP_SOURCES src/*.cpp)
-set(SOURCES ${C_SOURCES} ${CPP_SOURCES})
+set(SOURCES ${CPP_SOURCES})
 
 #download imgui
 include(FetchContent)
@@ -55,7 +55,11 @@ set (LIBRARIES
 find_package(Catch2 3)
 if(Catch2_FOUND)
   message(STATUS "CATCH2 found")
-  file(GLOB TEST_SOURCES test/*.cpp)
+  file(GLOB TEST_SOURCES test/*.cpp ${SOURCES})
+  # remove example from build now that unit tests for projects exist
+  list(REMOVE_ITEM TEST_SOURCES ${PROJECT_SOURCE_DIR}/test/example.cpp)
+  # remove main loop from test executable
+  list(REMOVE_ITEM TEST_SOURCES ${PROJECT_SOURCE_DIR}/src/main.cpp)
   add_executable(tests ${TEST_SOURCES})
   target_link_libraries(tests PUBLIC ${LIBRARIES} PRIVATE Catch2::Catch2WithMain)
   include(CTest)

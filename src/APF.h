@@ -18,7 +18,6 @@ class Grid {
 public:
   Grid(void);
   Grid(int w, int h);
-  ~Grid();
   int getWidth();
   int getHeight();
   void setObstacle(int w, int h);
@@ -34,6 +33,7 @@ private:
   int width;
 };
 
+inline void DEVIMPLMSG() { fmt::print("\nFUNCTION NOT IMPLEMENTED"); }
 // GRID Class TODO:
 // DONE create a grid of size w x h x 2
 // TODO: set individual values of grid

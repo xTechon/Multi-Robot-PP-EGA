@@ -1,4 +1,5 @@
 #include "APF.h"
+#include <fmt/core.h>
 
 int Grid::getWidth() { return width; }
 int Grid::getHeight() { return height; }
@@ -14,4 +15,9 @@ Grid::Grid(int w, int h) {
   this->height = h;
   this->map = std::vector<std::vector<std::vector<int>>>(
       width, std::vector<std::vector<int>>(height, std::vector<int>(2, 0)));
+}
+
+void Grid::setObstacle(int w, int h) {
+  DEVIMPLMSG();
+  return;
 }
