@@ -2,6 +2,7 @@
 #include <iostream>
 #include <map>
 #include <stdlib.h>
+#include <vector>
 
 namespace Env {
 class APF;   // to contain the algorithms for generating an APF map
@@ -17,8 +18,16 @@ class Grid {
 public:
   Grid(void);
   Grid(int w, int h);
+  ~Grid();
   int getWidth();
   int getHeight();
+  void setObstacle(int w, int h);
+  void clearObstacle(int w, int h);
+  void setPMV(int w, int h); // potential map value
+  void clearPMV(int w, int h);
+  void clearMap();
+  std::vector<std::vector<std::vector<int>>>
+      map; // 3d array to store obstacle and PMV information
 
 private:
   int height;
@@ -26,7 +35,7 @@ private:
 };
 
 // GRID Class TODO:
-// TODO: create a grid of size w x h x 1
+// DONE create a grid of size w x h x 2
 // TODO: set individual values of grid
 // TODO: import map from file
 // TODO: ability to set map potentials
