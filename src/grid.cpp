@@ -21,3 +21,18 @@ void Grid::setObstacle(int w, int h) {
   DEVIMPLMSG();
   return;
 }
+
+void Grid::clearObstacle(int w, int h) {
+  DEVIMPLMSG();
+  return;
+}
+
+void Grid::setPMV(int w, int h, int val) {
+  DEVIMPLMSG();
+  return;
+}
+
+void Grid::clearMap() {
+  DEVIMPLMSG();
+  return;
+}

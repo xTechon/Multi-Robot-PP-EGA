@@ -22,7 +22,7 @@ public:
   int getHeight();
   void setObstacle(int w, int h);
   void clearObstacle(int w, int h);
-  void setPMV(int w, int h); // potential map value
+  void setPMV(int w, int h, int val); // potential map value
   void clearPMV(int w, int h);
   void clearMap();
   std::vector<std::vector<std::vector<int>>>
