@@ -17,17 +17,20 @@ Grid::Grid(int w, int h) {
       width, std::vector<std::vector<int>>(height, std::vector<int>(2, 0)));
 }
 
-void Grid::setObstacle(int w, int h) {
+void Grid::setObstacle(int w, int h) { this->map[w][h][0] = 1; }
+
+void Grid::clearObstacle(int w, int h) { this->map[w][h][0] = 0; }
+
+void Grid::setPMV(int w, int h, int val) { this->map[w][h][1] = val; }
+
+void Grid::clearPMV(int w, int h) { this->map[w][h][1] = 0; }
+
+void Grid::clearObstacles() {
   DEVIMPLMSG();
   return;
 }
 
-void Grid::clearObstacle(int w, int h) {
-  DEVIMPLMSG();
-  return;
-}
-
-void Grid::setPMV(int w, int h, int val) {
+void Grid::clearPMVs() {
   DEVIMPLMSG();
   return;
 }

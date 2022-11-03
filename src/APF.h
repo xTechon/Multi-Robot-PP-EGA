@@ -24,7 +24,11 @@ public:
   void clearObstacle(int w, int h);
   void setPMV(int w, int h, int val); // potential map value
   void clearPMV(int w, int h);
-  void clearMap();
+  // obstacles are stored in [w][h][0]
+  // PMVs are stored in [w][h][1]
+  void clearObstacles(); // clears all obstacles in map
+  void clearPMVs();      // clears all the PMVs on the map
+  void clearMap();       // sets all values in map to 0
   std::vector<std::vector<std::vector<int>>>
       map; // 3d array to store obstacle and PMV information
 
