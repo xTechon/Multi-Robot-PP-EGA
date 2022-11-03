@@ -27,7 +27,11 @@ void Grid::clearPMV(int w, int h) { this->map[w][h][1] = 0; }
 
 void Grid::clearObstacles() {
   DEVIMPLMSG();
-  return;
+  for (int i = 0; i < this->width; i++) {
+    for (int k = 0; j < this->height; j++) {
+      this->map[i][k][0] = 0;
+    }
+  }
 }
 
 void Grid::clearPMVs() {
