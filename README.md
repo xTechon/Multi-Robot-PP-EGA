@@ -5,7 +5,8 @@ An implementation in C++ of: https://www.sciencedirect.com/science/article/pii/S
 - fmt: https://github.com/fmtlib/fmt
 - Catch2 (optional) for Unit tests: https://github.com/catchorg/Catch2
 - Dear ImGui: https://github.com/ocornut/imgui
-- glfw3: https://github.com/glfw/glfw
+- glfw3 (for ImGui): https://github.com/glfw/glfw
+- FreeType (for ImGui): https://gitlab.freedesktop.org/freetype/freetype
 
 Dear ImGui is auto downloaded by the cmake file
 <br>other dependencies need to be installed seperately
