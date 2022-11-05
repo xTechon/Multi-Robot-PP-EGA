@@ -4,3 +4,4 @@ bin/*
 bin
 .cache/*
 .cache
+compile_commands.json
