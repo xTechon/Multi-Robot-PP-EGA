@@ -13,6 +13,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
 file(GLOB CPP_SOURCES src/*.cpp)
 set(SOURCES ${CPP_SOURCES})
 
+#check for libraries
+find_package(fmt REQUIRED)
+find_package(glfw3 REQUIRED)
+#find_package(PkgConfig REQUIRED)
+#pkg_check_modules(FMT REQUIRED fmt)
+
 #download imgui
 include(FetchContent)
 FetchContent_Declare(
@@ -26,7 +32,7 @@ FetchContent_MakeAvailable(imgui)
 #CMakeLists.txt for imgui
 file(
   DOWNLOAD
-  https://gist.githubusercontent.com/xTechon/2ceeec48a5cae66e73722f8ef96cb970/raw/4efd2c5ff5acf39f8f1d1514ffaec8d4b3848c52/CMakeLists.txt
+  https://gist.githubusercontent.com/rokups/f771217b2d530d170db5cb1e08e9a8f4/raw/94dd1a018f9bb21ec3ac002978fa8d118c65e0ba/CMakeLists.txt
   "${imgui_SOURCE_DIR}/CMakeLists.txt"
   SHOW_PROGRESS
 )
@@ -39,10 +45,7 @@ if (NOT TARGET imgui)
   add_subdirectory("${imgui_SOURCE_DIR}")
 endif()
 
-#check for libraries
-find_package(fmt REQUIRED)
-#find_package(PkgConfig REQUIRED)
-#pkg_check_modules(FMT REQUIRED fmt)
+
 
 set (LIBRARIES
   imgui
