@@ -40,12 +40,13 @@ file(
 set(IMGUI_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(IMGUI_DEMO OFF CACHE BOOL "" FORCE)
 set(IMGUI_IMPL_GLUT OFF CACHE BOOL "" FORCE)
+set(IMGUI_IMPL_SDL OFF CACHE BOOL "" FORCE)
+set(IMGUI_IMPL_VULKAN OFF CACHE BOOL "" FORCE)
+
 
 if (NOT TARGET imgui)
   add_subdirectory("${imgui_SOURCE_DIR}")
 endif()
-
-
 
 set (LIBRARIES
   imgui
@@ -65,6 +66,7 @@ if(Catch2_FOUND)
   list(REMOVE_ITEM TEST_SOURCES ${PROJECT_SOURCE_DIR}/src/main.cpp)
   add_executable(tests ${TEST_SOURCES})
   target_link_libraries(tests PUBLIC ${LIBRARIES} PRIVATE Catch2::Catch2WithMain)
+  #Catch 2 options
   include(CTest)
   include(Catch)
   catch_discover_tests(tests)
