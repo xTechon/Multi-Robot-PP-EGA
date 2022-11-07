@@ -20,10 +20,13 @@ public:
   Grid(int w, int h);
   int getWidth();
   int getHeight();
-  void setObstacle(int w, int h);
-  void clearObstacle(int w, int h);
-  void setPMV(int w, int h, int val); // potential map value
-  void clearPMV(int w, int h);
+
+  // These functions return false if index given out of bounds
+  bool setObstacle(int w, int h);
+  bool clearObstacle(int w, int h);
+  bool setPMV(int w, int h, int val);
+  bool clearPMV(int w, int h);
+
   void clearObstacles(); // clears all obstacles in map
   void clearPMVs();      // clears all the PMVs on the map
   void clearMap();       // sets all values in map to 0
@@ -35,6 +38,7 @@ public:
 private:
   int height;
   int width;
+  bool checkIndex(int w, int h); // returns false if index out of bounds
 };
 
 inline void DEVIMPLMSG() { fmt::print("\nFUNCTION NOT IMPLEMENTED"); }

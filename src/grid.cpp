@@ -17,13 +17,44 @@ Grid::Grid(int w, int h) {
       width, std::vector<std::vector<int>>(height, std::vector<int>(2, 0)));
 }
 
-void Grid::setObstacle(int w, int h) { this->map[w][h][0] = 1; }
+bool Grid::setObstacle(int w, int h) {
+  if (!checkIndex(w, h))
+    return false;
+  this->map[w][h][0] = 1;
+  return true;
+}
 
-void Grid::clearObstacle(int w, int h) { this->map[w][h][0] = 0; }
+bool Grid::clearObstacle(int w, int h) {
+  if (!checkIndex(w, h))
+    return false;
+  this->map[w][h][0] = 0;
+  return true;
+}
 
-void Grid::setPMV(int w, int h, int val) { this->map[w][h][1] = val; }
+// Returns true if index is in bounds, false if not
+bool Grid::checkIndex(int w, int h) {
+  if ((w >= this->width) || (h >= this->height) || (w < 0) || (h < 0)) {
+#ifndef NDEBUG
+    std::cout << fmt::format("ERROR: INDEX OUT OF BOUNDS") << std::endl;
+#endif
+    return false;
+  } else
+    return true;
+}
 
-void Grid::clearPMV(int w, int h) { this->map[w][h][1] = 0; }
+bool Grid::setPMV(int w, int h, int val) {
+  if (checkIndex(w, h))
+    return false;
+  this->map[w][h][1] = val;
+  return true;
+}
+
+bool Grid::clearPMV(int w, int h) {
+  if (checkIndex(w, h))
+    return false;
+  this->map[w][h][1] = 0;
+  return true;
+}
 
 void Grid::clearObstacles() {
   for (int i = 0; i < this->width; i++) {
@@ -34,11 +65,16 @@ void Grid::clearObstacles() {
 }
 
 void Grid::clearPMVs() {
-  DEVIMPLMSG();
+  for (int i = 0; i < this->width; i++) {
+    for (int j = 0; j < this->height; j++) {
+      this->map[i][j][1] = 0;
+    }
+  }
   return;
 }
 
 void Grid::clearMap() {
-  DEVIMPLMSG();
+  this->clearObstacles();
+  this->clearPMVs();
   return;
 }
