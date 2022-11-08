@@ -8,3 +8,6 @@ compile_commands.json
 compile_commands.json
 /.ccls-cache/
 *.profraw
+/coverage/
+/tests.info
+/tests.profdata
