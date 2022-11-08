@@ -8,6 +8,9 @@ int Grid::getHeight() { return height; }
 Grid::Grid(void) {
   this->width = 10;
   this->height = 10;
+  this->map = std::vector<std::vector<std::vector<int>>>(
+      this->width,
+      std::vector<std::vector<int>>(this->height, std::vector<int>(2, 0)));
 }
 
 Grid::Grid(int w, int h) {
