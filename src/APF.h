@@ -27,9 +27,10 @@ public:
   bool setPMV(int w, int h, int val);
   bool clearPMV(int w, int h);
 
-  void clearObstacles(); // clears all obstacles in map
-  void clearPMVs();      // clears all the PMVs on the map
-  void clearMap();       // sets all values in map to 0
+  void clearObstacles();                     // clears all obstacles in map
+  void clearPMVs();                          // clears all the PMVs on the map
+  void clearMap();                           // sets all values in map to 0
+  std::string printVal(int x, int y, int z); // prints out a value from the map
   // obstacles are stored in [w][h][0]
   // PMVs are stored in [w][h][1]
   std::vector<std::vector<std::vector<int>>>

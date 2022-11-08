@@ -14,7 +14,8 @@ Grid::Grid(int w, int h) {
   this->width = w;
   this->height = h;
   this->map = std::vector<std::vector<std::vector<int>>>(
-      width, std::vector<std::vector<int>>(height, std::vector<int>(2, 0)));
+      this->width,
+      std::vector<std::vector<int>>(this->height, std::vector<int>(2, 0)));
 }
 
 bool Grid::setObstacle(int w, int h) {
@@ -43,14 +44,14 @@ bool Grid::checkIndex(int w, int h) {
 }
 
 bool Grid::setPMV(int w, int h, int val) {
-  if (checkIndex(w, h))
+  if (!checkIndex(w, h))
     return false;
   this->map[w][h][1] = val;
   return true;
 }
 
 bool Grid::clearPMV(int w, int h) {
-  if (checkIndex(w, h))
+  if (!checkIndex(w, h))
     return false;
   this->map[w][h][1] = 0;
   return true;
@@ -77,4 +78,11 @@ void Grid::clearMap() {
   this->clearObstacles();
   this->clearPMVs();
   return;
+}
+
+std::string Grid::printVal(int x, int y, int z) {
+  std::string result;
+  result =
+      fmt::format("value at ({}, {}, {}): {}", x, y, z, this->map[x][y][z]);
+  return result;
 }

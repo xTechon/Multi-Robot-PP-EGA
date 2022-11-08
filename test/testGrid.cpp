@@ -34,21 +34,18 @@ TEST_CASE("Grid Class functions") {
     REQUIRE(hallway->map[1][0][0] == 1);
 
 #ifndef NDEBUG
-    std::cout << fmt::format("Obstacle at ({},{}) in SqrRoom", 9, 9)
-              << std::endl;
-    std::cout << fmt::format("Obstacle at ({},{}) in SqrRoom", 4, 9)
-              << std::endl;
+    std::cout << "sqrRoom " << sqrRoom->printVal(9, 9, 0) << std::endl;
+    std::cout << "recRoom" << recRoom->printVal(4, 9, 0) << std::endl;
 #endif
 
     /*Grid sets PMVs*/
-#ifndef NDEBUG
-    std::cout << fmt::format("sqrRoom value at ({}, {}): {}", 5, 5,
-                             sqrRoom->map[5][5][1])
-              << std::endl;
-#endif
-    REQUIRE(sqrRoom->setPMV(5, 5, 100) == true); // fails, why?
+    REQUIRE(sqrRoom->setPMV(0, 0, 100) == true);
     REQUIRE(recRoom->setPMV(4, 5, 100) == true);
-    REQUIRE(sqrRoom->map[5][5][1] == 100);
+#ifndef NDEBUG
+    std::cout << "sqrRoom " << sqrRoom->printVal(0, 0, 1) << std::endl;
+    std::cout << "recRoom " << sqrRoom->printVal(4, 5, 1) << std::endl;
+#endif
+    REQUIRE(sqrRoom->map[0][0][1] == 100);
     REQUIRE(sqrRoom->map[4][5][1] == 100);
   }
 
