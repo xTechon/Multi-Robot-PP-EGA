@@ -40,13 +40,13 @@ TEST_CASE("Grid Class functions") {
 
     /*Grid sets PMVs*/
     REQUIRE(sqrRoom->setPMV(0, 0, 100) == true);
-    REQUIRE(recRoom->setPMV(4, 5, 100) == true);
+    REQUIRE(recRoom->setPMV(4, 4, 100) == true);
 #ifndef NDEBUG
     std::cout << "sqrRoom " << sqrRoom->printVal(0, 0, 1) << std::endl;
-    std::cout << "recRoom " << sqrRoom->printVal(4, 5, 1) << std::endl;
+    std::cout << "recRoom " << recRoom->printVal(4, 4, 1) << std::endl;
 #endif
     REQUIRE(sqrRoom->map[0][0][1] == 100);
-    REQUIRE(sqrRoom->map[4][5][1] == 100);
+    REQUIRE(recRoom->map[4][4][1] == 100);
   }
 
   SECTION("Grid Clears values") {
@@ -58,7 +58,7 @@ TEST_CASE("Grid Class functions") {
     // test recRoom
     REQUIRE(recRoom->clearObstacle(4, 9) == true);
     REQUIRE(recRoom->clearObstacle(4, 9) == true);
-    REQUIRE(sqrRoom->map[4][9][0] == 0);
+    REQUIRE(recRoom->map[4][9][0] == 0);
 
     // Test clear maps
   }
