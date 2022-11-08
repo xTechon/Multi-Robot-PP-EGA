@@ -14,7 +14,7 @@ TEST_CASE("Grid Class functions") {
   REQUIRE(recRoom->getWidth() == 5);
   REQUIRE(recRoom->getHeight() == 10);
 
-  SECTION("Grid sets Values") {
+  SECTION("Grid sets obstacles") {
     /*Grid sets Obstacles*/
     // test sqrRoom
     REQUIRE(sqrRoom->setObstacle(9, 9) == true);
@@ -37,19 +37,20 @@ TEST_CASE("Grid Class functions") {
     std::cout << "sqrRoom " << sqrRoom->printVal(9, 9, 0) << std::endl;
     std::cout << "recRoom" << recRoom->printVal(4, 9, 0) << std::endl;
 #endif
-
-    /*Grid sets PMVs*/
-    REQUIRE(sqrRoom->setPMV(0, 0, 100) == true);
-    REQUIRE(recRoom->setPMV(4, 4, 100) == true);
+    SECTION("GRID SETS PMVs") {
+      /*Grid sets PMVs*/
+      REQUIRE(sqrRoom->setPMV(0, 0, 100) == true);
+      REQUIRE(recRoom->setPMV(4, 4, 100) == true);
 #ifndef NDEBUG
-    std::cout << "sqrRoom " << sqrRoom->printVal(0, 0, 1) << std::endl;
-    std::cout << "recRoom " << recRoom->printVal(4, 4, 1) << std::endl;
+      std::cout << "sqrRoom " << sqrRoom->printVal(0, 0, 1) << std::endl;
+      std::cout << "recRoom " << recRoom->printVal(4, 4, 1) << std::endl;
 #endif
-    REQUIRE(sqrRoom->map[0][0][1] == 100);
-    REQUIRE(recRoom->map[4][4][1] == 100);
+      REQUIRE(sqrRoom->map[0][0][1] == 100);
+      REQUIRE(recRoom->map[4][4][1] == 100);
+    }
   }
 
-  SECTION("Grid Clears values") {
+  SECTION("Grid Clears obstacles") {
     // test sqrRoom
     REQUIRE(sqrRoom->clearObstacle(9, 9) == true);
     REQUIRE(sqrRoom->clearObstacle(9, -1) == false);
