@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <vector>
 
+#include "imgui.h"
+
 namespace Env {
 class APF;         // to contain the algorithms for generating an APF map
 class Grid;        // to contain the actual map enviornment
@@ -44,7 +46,8 @@ private:
 };
 
 class FileHandler {
-  void drawGUI(bool toggle); // generate the file picker dialog
+public:
+  void drawGUI(); // generate the file picker dialog
 };
 
 inline void DEVIMPLMSG() { fmt::print("\nFUNCTION NOT IMPLEMENTED"); }

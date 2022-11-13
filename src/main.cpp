@@ -1,3 +1,4 @@
+#include "APF.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -67,12 +68,15 @@ int main(int, char **) {
     {
       static float f = 0.0f;
       static int counter = 0;
+      static FileHandler *filePicker = new FileHandler();
       ImGui::Begin("Hello world!");
       ImGui::Text("Some usefule text.");
       ImGui::Checkbox("Another Window", &show_another_window);
 
       ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
       ImGui::ColorEdit3("clear color", (float *)&clear_color);
+      filePicker->drawGUI();
+
       ImGui::End();
     }
 
