@@ -28,6 +28,19 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(imgui)
 
+#download file dialog extension
+FetchContent_Declare(
+  filedialog
+  DOWNLOAD_EXTRACT_TIMESTAMP OFF
+  URL "https://github.com/aiekick/ImGuiFileDialog/archive/refs/heads/Lib_Only.tar.gz"
+)
+FetchContent_MakeAvailable(filedialog)
+
+file(
+  COPY "${filedialog_SOURCE_DIR}/ImGuiFileDialog.h"
+  DESTINATION "${PROJECT_SOURCE_DIR}/src"
+)
+
 #message(STATUS "${imgui_SOURCE_DIR}")
 #CMakeLists.txt for imgui
 file(
@@ -55,6 +68,12 @@ set (LIBRARIES
   fmt::fmt
 )
 
+set(EXTENSIONS
+  ${PROJECT_SOURCE_DIR}/src/ImGuiFileDialog.h
+  ${filedialog_SOURCE_DIR}/ImGuiFileDialog.cpp
+)
+
+
 #optional Catch2 for unit testing
 find_package(Catch2 3)
 if(Catch2_FOUND)
@@ -64,7 +83,7 @@ if(Catch2_FOUND)
   list(REMOVE_ITEM TEST_SOURCES ${PROJECT_SOURCE_DIR}/test/example.cpp)
   # remove main loop from test executable
   list(REMOVE_ITEM TEST_SOURCES ${PROJECT_SOURCE_DIR}/src/main.cpp)
-  add_executable(tests ${TEST_SOURCES})
+  add_executable(tests ${TEST_SOURCES} ${EXTENSIONS})
   target_link_libraries(tests PUBLIC ${LIBRARIES} PRIVATE Catch2::Catch2WithMain)
   #Catch 2 options
   include(CTest)
@@ -73,5 +92,5 @@ if(Catch2_FOUND)
 endif()
 
 # Setup the target executable.
-add_executable(${PROJECT} ${SOURCES})
+add_executable(${PROJECT} ${SOURCES} ${EXTENSIONS})
 target_link_libraries(${PROJECT} ${LIBRARIES})

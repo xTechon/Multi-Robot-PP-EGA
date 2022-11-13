@@ -5,9 +5,10 @@
 #include <vector>
 
 namespace Env {
-class APF;   // to contain the algorithms for generating an APF map
-class Grid;  // to contain the actual map enviornment
-class Edges; // to contain the edges of the map
+class APF;         // to contain the algorithms for generating an APF map
+class Grid;        // to contain the actual map enviornment
+class Edges;       // to contain the edges of the map
+class FileHandler; // to handle file imports
 } // namespace Env
 
 class APF {
@@ -42,10 +43,14 @@ private:
   bool checkIndex(int w, int h); // returns false if index out of bounds
 };
 
+class FileHandler {
+  void drawGUI(bool toggle); // generate the file picker dialog
+};
+
 inline void DEVIMPLMSG() { fmt::print("\nFUNCTION NOT IMPLEMENTED"); }
 // GRID Class TODO:
 // DONE create a grid of size w x h x 2
-// TODO: set individual values of grid
+// DONE set individual values of grid
 // TODO: import map from file
 // TODO: ability to set map potentials
 

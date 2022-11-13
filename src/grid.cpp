@@ -1,5 +1,4 @@
 #include "APF.h"
-#include <fmt/core.h>
 
 int Grid::getWidth() { return width; }
 int Grid::getHeight() { return height; }
