@@ -85,6 +85,7 @@ if(Catch2_FOUND)
   list(REMOVE_ITEM TEST_SOURCES ${PROJECT_SOURCE_DIR}/src/main.cpp)
   add_executable(tests ${TEST_SOURCES} ${EXTENSIONS})
   target_link_libraries(tests PUBLIC ${LIBRARIES} PRIVATE Catch2::Catch2WithMain)
+  set_target_properties(tests PROPERTIES COMPILE_FLAGS "-DTESTS")
   #Catch 2 options
   include(CTest)
   include(Catch)
