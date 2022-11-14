@@ -54,7 +54,7 @@ int main(int, char **) {
   bool show_another_window = false;
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
   FileHandler *filePicker = new FileHandler();
-  std::string fileP = " ";
+  std::string *fileP = nullptr;
 
   // Main window loop
   while (!glfwWindowShouldClose(window)) {
@@ -75,10 +75,14 @@ int main(int, char **) {
       ImGui::Checkbox("Another Window", &show_another_window);
       ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
       ImGui::ColorEdit3("clear color", (float *)&clear_color);
-      fileP = filePicker->drawGUI();
+      fileP = filePicker->drawGUI(fileP);
+      if (fileP != nullptr) {
+        const char *file = fileP->c_str();
+        ImGui::Text("%s", file);
+        // std::cout << fmt::format("{}", *fileP) << std::endl;
+      }
       if (ImGui::GetIO().KeyAlt)
         printf(""); // Set a debugger breakpoint here!
-      std::cout << fmt::format("{}", fileP) << std::endl;
 
       ImGui::End();
     }

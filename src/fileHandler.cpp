@@ -1,33 +1,36 @@
 #include "APF.h"
 #include "ImGuiFileDialog.h"
 
-std::string FileHandler::drawGUI() {
+std::string *FileHandler::drawGUI(std::string *fileP) {
   // open Dialog Simple
   // std::cout << fmt::format("DrawGUI");
-  if (ImGui::Button("Open File Dialog"))
+  if (ImGui::Button("Open File Dialog")) {
     ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File",
                                             ".cpp,.h,.hpp", ".");
-  std::string filePathName = "";
-  std::string filePath = "";
+  }
+  static std::string filePathName;
+  static std::string filePath;
   // display
   if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey")) {
     // action if OK
     if (ImGuiFileDialog::Instance()->IsOk()) {
-      std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-      std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-      const char *fileP = filePathName.c_str();
-      // action
-      // ImGui::Text("%s", fileP);
-      // std::cout << fmt::format("{}", filePathName) << std::endl;
+      filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+      filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+      // const char *fileP = filePathName.c_str();
+      //  action
+      //  ImGui::Text("%s", fileP);
+      //  std::cout << fmt::format("{}", filePathName) << std::endl;
       ImGuiFileDialog::Instance()->Close();
       if (ImGui::GetIO().KeyAlt)
         printf(""); // Set a debugger breakpoint here!
-      return filePathName;
+      return &filePathName;
     }
 
     // close
     ImGuiFileDialog::Instance()->Close();
-    return filePathName;
+    return nullptr;
   }
-  return filePathName;
+  if (fileP != nullptr)
+    return fileP;
+  return nullptr;
 }
