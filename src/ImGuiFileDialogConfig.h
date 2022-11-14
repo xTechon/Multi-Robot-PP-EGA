@@ -2,40 +2,41 @@
 
 // uncomment and modify defines under for customize ImGuiFileDialog
 
-//this options need c++17
-//#define USE_STD_FILESYSTEM
+// this options need c++17
+#define USE_STD_FILESYSTEM
 
 //#define MAX_FILE_DIALOG_NAME_BUFFER 1024
 //#define MAX_PATH_BUFFER_SIZE 1024
 
-// the slash's buttons in path cna be used for quick select parallles directories
+// the slash's buttons in path cna be used for quick select parallles
+// directories
 //#define USE_QUICK_PATH_SELECT
 
-// the spacing between button path's can be customized. 
+// the spacing between button path's can be customized.
 // if disabled the spacing is defined by the imgui theme
-// define the space between path buttons 
+// define the space between path buttons
 //#define CUSTOM_PATH_SPACING 2
 
 //#define USE_THUMBNAILS
-//the thumbnail generation use the stb_image and stb_resize lib who need to define the implementation
-//btw if you already use them in your app, you can have compiler error due to "implemntation found in double"
-//so uncomment these line for prevent the creation of implementation of these libs again
-//#define DONT_DEFINE_AGAIN__STB_IMAGE_IMPLEMENTATION
-//#define DONT_DEFINE_AGAIN__STB_IMAGE_RESIZE_IMPLEMENTATION
-//#define IMGUI_RADIO_BUTTON RadioButton
-//#define DisplayMode_ThumbailsList_ImageHeight 32.0f
-//#define tableHeaderFileThumbnailsString "Thumbnails"
-//#define DisplayMode_FilesList_ButtonString "FL"
-//#define DisplayMode_FilesList_ButtonHelp "File List"
-//#define DisplayMode_ThumbailsList_ButtonString "TL"
-//#define DisplayMode_ThumbailsList_ButtonHelp "Thumbnails List"
+// the thumbnail generation use the stb_image and stb_resize lib who need to
+// define the implementation btw if you already use them in your app, you can
+// have compiler error due to "implemntation found in double" so uncomment these
+// line for prevent the creation of implementation of these libs again #define
+//DONT_DEFINE_AGAIN__STB_IMAGE_IMPLEMENTATION #define
+//DONT_DEFINE_AGAIN__STB_IMAGE_RESIZE_IMPLEMENTATION #define IMGUI_RADIO_BUTTON
+//RadioButton #define DisplayMode_ThumbailsList_ImageHeight 32.0f #define
+//tableHeaderFileThumbnailsString "Thumbnails" #define
+//DisplayMode_FilesList_ButtonString "FL" #define
+//DisplayMode_FilesList_ButtonHelp "File List" #define
+//DisplayMode_ThumbailsList_ButtonString "TL" #define
+//DisplayMode_ThumbailsList_ButtonHelp "Thumbnails List"
 // todo
 //#define DisplayMode_ThumbailsGrid_ButtonString "TG"
 //#define DisplayMode_ThumbailsGrid_ButtonHelp "Thumbnails Grid"
 
 //#define USE_EXPLORATION_BY_KEYS
 // this mapping by default is for GLFW but you can use another
-//#include <GLFW/glfw3.h> 
+//#include <GLFW/glfw3.h>
 // Up key for explore to the top
 //#define IGFD_KEY_UP ImGuiKey_UpArrow
 // Down key for explore to the bottom
@@ -46,8 +47,8 @@
 //#define IGFD_KEY_BACKSPACE ImGuiKey_Backspace
 
 // by ex you can quit the dialog by pressing the key excape
-//#define USE_DIALOG_EXIT_WITH_KEY
-//#define IGFD_EXIT_KEY ImGuiKey_Escape
+#define USE_DIALOG_EXIT_WITH_KEY
+#define IGFD_EXIT_KEY ImGuiKey_Escape
 
 // widget
 // filter combobox width
@@ -70,20 +71,19 @@
 //#define dirNameString "Directory Path :"
 //#define buttonResetSearchString "Reset search"
 //#define buttonDriveString "Drives"
-//#define buttonEditPathString "Edit path\nYou can also right click on path buttons"
-//#define buttonResetPathString "Reset to current directory"
-//#define buttonCreateDirString "Create Directory"
-//#define OverWriteDialogTitleString "The file Already Exist !"
-//#define OverWriteDialogMessageString "Would you like to OverWrite it ?"
-//#define OverWriteDialogConfirmButtonString "Confirm"
+//#define buttonEditPathString "Edit path\nYou can also right click on path
+//buttons" #define buttonResetPathString "Reset to current directory" #define
+//buttonCreateDirString "Create Directory" #define OverWriteDialogTitleString
+//"The file Already Exist !" #define OverWriteDialogMessageString "Would you
+//like to OverWrite it ?" #define OverWriteDialogConfirmButtonString "Confirm"
 //#define OverWriteDialogCancelButtonString "Cancel"
 
-//Validation buttons
+// Validation buttons
 //#define okButtonString " OK"
 //#define okButtonWidth 0.0f
 //#define cancelButtonString " Cancel"
 //#define cancelButtonWidth 0.0f
-//alignement [0:1], 0.0 is left, 0.5 middle, 1.0 right, and other ratios
+// alignement [0:1], 0.0 is left, 0.5 middle, 1.0 right, and other ratios
 //#define okCancelButtonAlignement 0.0f
 //#define invertOkAndCancelButtons 0
 
@@ -106,10 +106,12 @@
 //#define fileSizeMegaBytes "Mo"
 //#define fileSizeGigaBytes "Go"
 
-// default table sort field (must be FIELD_FILENAME, FIELD_TYPE, FIELD_SIZE, FIELD_DATE or FIELD_THUMBNAILS)
+// default table sort field (must be FIELD_FILENAME, FIELD_TYPE, FIELD_SIZE,
+// FIELD_DATE or FIELD_THUMBNAILS)
 //#define defaultSortField FIELD_FILENAME
 
-// default table sort order for each field (true => Descending, false => Ascending)
+// default table sort order for each field (true => Descending, false =>
+// Ascending)
 //#define defaultSortOrderFilename true
 //#define defaultSortOrderType true
 //#define defaultSortOrderSize true

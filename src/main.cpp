@@ -53,6 +53,8 @@ int main(int, char **) {
   bool show_demo_window = true;
   bool show_another_window = false;
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+  FileHandler *filePicker = new FileHandler();
+  std::string fileP = " ";
 
   // Main window loop
   while (!glfwWindowShouldClose(window)) {
@@ -68,14 +70,15 @@ int main(int, char **) {
     {
       static float f = 0.0f;
       static int counter = 0;
-      static FileHandler *filePicker = new FileHandler();
       ImGui::Begin("Hello world!");
-      ImGui::Text("Some usefule text.");
+      ImGui::Text("Some useful text.");
       ImGui::Checkbox("Another Window", &show_another_window);
-
       ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
       ImGui::ColorEdit3("clear color", (float *)&clear_color);
-      filePicker->drawGUI();
+      fileP = filePicker->drawGUI();
+      if (ImGui::GetIO().KeyAlt)
+        printf(""); // Set a debugger breakpoint here!
+      std::cout << fmt::format("{}", fileP) << std::endl;
 
       ImGui::End();
     }

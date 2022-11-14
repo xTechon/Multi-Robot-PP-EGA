@@ -13,3 +13,4 @@ compile_commands.json
 /tests.profdata
 /coverage.sh
 /src/ImGuiFileDialog.h
+/imgui.ini

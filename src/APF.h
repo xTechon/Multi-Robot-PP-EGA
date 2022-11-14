@@ -47,7 +47,7 @@ private:
 
 class FileHandler {
 public:
-  void drawGUI(); // generate the file picker dialog
+  std::string drawGUI(); // generate the file picker dialog
 };
 
 inline void DEVIMPLMSG() { fmt::print("\nFUNCTION NOT IMPLEMENTED"); }
