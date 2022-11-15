@@ -82,7 +82,7 @@ int main(int, char **) {
       ImGui::Checkbox("Another Window", &show_another_window);
       ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
       ImGui::ColorEdit3("clear color", (float *)&clear_color);
-      filePath = filePicker->drawGUI(filePath);
+      filePath = filePicker->drawGUI(filePath, &fileLoad);
       if (filePath != nullptr) {
         const char *file = filePath->c_str();
         ImGui::Text("File Choosen:\n%s", file);

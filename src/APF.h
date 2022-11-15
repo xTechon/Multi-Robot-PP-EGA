@@ -52,7 +52,8 @@ private:
                 std::string line);
 
 public:
-  std::string *drawGUI(std::string *fileP); // generate the file picker dialog
+  std::string *drawGUI(std::string *fileP,
+                       bool *fileLoaded); // generate the file picker dialog
   FileHandler(void);
 
   // return a pointer to a static grid object
