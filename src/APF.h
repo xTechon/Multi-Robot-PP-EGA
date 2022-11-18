@@ -6,18 +6,22 @@
 
 #include "imgui.h"
 
-namespace Env {
-class APF;         // to contain the algorithms for generating an APF map
-class Grid;        // to contain the actual map enviornment
-class Edges;       // to contain the edges of the map
-class FileHandler; // to handle file imports
+namespace Env
+{
+  class APF;         // to contain the algorithms for generating an APF map
+  class Grid;        // to contain the actual map enviornment
+  class Edges;       // to contain the edges of the map
+  class FileHandler; // to handle file imports
 } // namespace Env
 
-class APF {
+class APF
+{
 public:
+  APF(Grid grid);
 };
 
-class Grid {
+class Grid
+{
 public:
   Grid(void);
   Grid(int w, int h);
@@ -29,6 +33,7 @@ public:
   bool clearObstacle(int w, int h);
   bool setPMV(int w, int h, int val);
   bool clearPMV(int w, int h);
+  bool isObstacle(int w, int h);
 
   void clearObstacles();                     // clears all obstacles in map
   void clearPMVs();                          // clears all the PMVs on the map
@@ -45,7 +50,8 @@ private:
   bool checkIndex(int w, int h); // returns false if index out of bounds
 };
 
-class FileHandler {
+class FileHandler
+{
 public:
   std::string *drawGUI(std::string *fileP); // generate the file picker dialog
 };
