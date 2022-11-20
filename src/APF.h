@@ -50,10 +50,20 @@ private:
   bool checkIndex(int w, int h); // returns false if index out of bounds
 };
 
-class FileHandler
-{
+class FileHandler {
+private:
+  bool error;
+  void fillGrid(Grid *terrain, std::fstream &f, std::string word,
+                std::string line);
 public:
-  std::string *drawGUI(std::string *fileP); // generate the file picker dialog
+  std::string *drawGUI(std::string *fileP,
+                       bool *fileLoaded); // generate the file picker dialog
+  FileHandler(void);
+
+  // return a pointer to a static grid object
+  // if successful, null otherwise
+  Grid *importGrid(std::string *filePath, Grid *check);
+  void errorMsg(bool *display);
 };
 
 inline void DEVIMPLMSG() { fmt::print("\nFUNCTION NOT IMPLEMENTED"); }
