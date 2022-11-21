@@ -7,9 +7,11 @@ There are many volitaile changes and restructuring happening often
 ## Dependencies:
 - fmt: https://github.com/fmtlib/fmt
 - Catch2 (optional) for Unit tests: https://github.com/catchorg/Catch2
-- Dear ImGui: https://github.com/ocornut/imgui
 - glfw3 (for ImGui): https://github.com/glfw/glfw
 - FreeType (for ImGui): https://gitlab.freedesktop.org/freetype/freetype
+- Dear ImGui: https://github.com/ocornut/imgui
+    - File Dialog Enxtension: https://github.com/aiekick/ImGuiFileDialog
+    - ImPlot Extension: https://github.com/epezent/implot
 
 ## Build information
 Dear ImGui is auto downloaded by the cmake file
