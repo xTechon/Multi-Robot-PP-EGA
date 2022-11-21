@@ -5,7 +5,8 @@
       "freetype",
       "fmt",
       "glfw3",
-      "catch2"
+      "catch2",
+      "implot"
     ]
     
   }

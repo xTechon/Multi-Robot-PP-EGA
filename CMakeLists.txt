@@ -16,6 +16,7 @@ set(SOURCES ${CPP_SOURCES})
 #check for libraries
 find_package(fmt REQUIRED)
 find_package(glfw3 REQUIRED)
+find_package(implot QUIET)
 #find_package(PkgConfig REQUIRED)
 #pkg_check_modules(FMT REQUIRED fmt)
 
@@ -35,7 +36,6 @@ FetchContent_Declare(
   URL "https://github.com/aiekick/ImGuiFileDialog/archive/refs/heads/Lib_Only.tar.gz"
 )
 FetchContent_MakeAvailable(filedialog)
-
 file(
   COPY "${filedialog_SOURCE_DIR}/ImGuiFileDialog.h"
   DESTINATION "${PROJECT_SOURCE_DIR}/src"
@@ -50,6 +50,8 @@ file(
   SHOW_PROGRESS
 )
 
+
+#set variables for imgui
 set(IMGUI_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(IMGUI_DEMO OFF CACHE BOOL "" FORCE)
 set(IMGUI_IMPL_GLUT OFF CACHE BOOL "" FORCE)
@@ -68,11 +70,31 @@ set (LIBRARIES
   fmt::fmt
 )
 
-set(EXTENSIONS
-  ${PROJECT_SOURCE_DIR}/src/ImGuiFileDialog.h
-  ${filedialog_SOURCE_DIR}/ImGuiFileDialog.cpp
-)
+#set(EXTENSIONS
+  #File dialog extension
+#  ${PROJECT_SOURCE_DIR}/src/ImGuiFileDialog.h
+#  ${filedialog_SOURCE_DIR}/ImGuiFileDialog.cpp
+#)
 
+#case if not using vcpkg
+if (NOT implot_FOUND)
+FetchContent_Declare(
+    implotgit
+    DOWNLOAD_EXTRACT_TIMESTAMP OFF
+    URL "https://github.com/epezent/implot/archive/refs/heads/master.tar.gz"
+    )
+FetchContent_MakeAvailable(implotgit)
+set(EXTENSIONS
+    #File dialog extension
+    ${PROJECT_SOURCE_DIR}/src/ImGuiFileDialog.h
+    ${filedialog_SOURCE_DIR}/ImGuiFileDialog.cpp
+    #ImPlot extension
+    ${implotgit_SOURCE_DIR}/implot.h
+    ${implotgit_SOURCE_DIR}/implot_internal.h
+    ${implotgit_SOURCE_DIR}/implot.cpp
+    ${implotgit_SOURCE_DIR}/implot_items.cpp
+)
+endif()
 
 #optional Catch2 for unit testing
 find_package(Catch2 3)
