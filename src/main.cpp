@@ -50,11 +50,18 @@ int main(int, char **) {
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL3_Init(glsl_version);
 
+  // Window booleans
   bool show_demo_window = true;
   bool show_another_window = false;
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
+  // filePath variables
+  std::string *filePath = nullptr;
+
+  // file loader variables
   FileHandler *filePicker = new FileHandler();
-  std::string *fileP = nullptr;
+  bool fileLoad = false;
+  Grid *terrain = (Grid *)nullptr;
 
   // Main window loop
   while (!glfwWindowShouldClose(window)) {
@@ -75,11 +82,19 @@ int main(int, char **) {
       ImGui::Checkbox("Another Window", &show_another_window);
       ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
       ImGui::ColorEdit3("clear color", (float *)&clear_color);
-      fileP = filePicker->drawGUI(fileP);
-      if (fileP != nullptr) {
-        const char *file = fileP->c_str();
-        ImGui::Text("%s", file);
+      filePath = filePicker->drawGUI(filePath, &fileLoad);
+      if (filePath != nullptr) {
+        const char *file = filePath->c_str();
+        ImGui::Text("File Choosen:\n%s", file);
         // std::cout << fmt::format("{}", *fileP) << std::endl;
+        if (fileLoad == false) {
+          // load the terrain
+          terrain = filePicker->importGrid(filePath, terrain);
+          ImGui::Text("Terrain Loaded");
+          // Breakpoint toggle
+          if (ImGui::GetIO().KeyAlt)
+            printf(""); // Set a debugger breakpoint here!
+        }
       }
       if (ImGui::GetIO().KeyAlt)
         printf(""); // Set a debugger breakpoint here!
