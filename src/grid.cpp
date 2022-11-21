@@ -55,7 +55,10 @@ bool Grid::clearPMV(int w, int h) {
   return true;
 }
 
-bool Grid::isObstacle(int w, int h) { return this->map[w][h][0] == 1; }
+bool Grid::isObstacle(int w, int h) {
+  return this->map[w][h][0] == 1 || w < 0 || h < 0 || w == this->width ||
+         h == this->height;
+}
 
 int Grid::getPMV(int w, int h) { return this->map[w][h][1]; }
 
