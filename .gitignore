@@ -14,3 +14,4 @@ compile_commands.json
 /coverage.sh
 /src/ImGuiFileDialog.h
 /imgui.ini
+/src/implot.h

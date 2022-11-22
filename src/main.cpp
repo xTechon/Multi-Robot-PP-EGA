@@ -1,16 +1,7 @@
-#include "APF.h"
-#include "imgui.h"
+#include "main.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
-
-#ifdef _WIN32
-#include <windows.h> //windows only header required
-#endif
-#include <GL/gl.h>
-#include <GLFW/glfw3.h>
-#include <cstddef>
-#include <math.h>
-#include <stdio.h>
+#include "implot.h"
 
 // Example code from:
 // https://github.com/ocornut/imgui/blob/master/examples/example_glfw_opengl3/main.cpp
@@ -40,6 +31,7 @@ int main(int, char **) {
   // Dear ImGui context
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
+  ImPlot::CreateContext();
   ImGuiIO &io = ImGui::GetIO();
   (void)io;
 
@@ -62,6 +54,7 @@ int main(int, char **) {
   FileHandler *filePicker = new FileHandler();
   bool fileLoad = false;
   Grid *terrain = (Grid *)nullptr;
+  Interact *plots = new Interact();
 
   // Main window loop
   while (!glfwWindowShouldClose(window)) {
@@ -110,6 +103,8 @@ int main(int, char **) {
       ImGui::End();
     }
 
+    plots->drawMapTest();
+
     // Rendering
     ImGui::Render();
     int display_w, display_h;
@@ -126,6 +121,7 @@ int main(int, char **) {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
+  ImPlot::DestroyContext();
 
   glfwDestroyWindow(window);
   glfwTerminate();
