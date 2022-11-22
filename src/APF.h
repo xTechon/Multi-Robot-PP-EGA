@@ -10,19 +10,14 @@
 #include "imgui.h"
 
 namespace Env {
-class APF;          // to contain the algorithms for generating an APF map
-class Grid;         // to contain the actual map enviornment
-class Edges;        // to contain the edges of the map
-class FileHandler;  // to handle file imports
-}  // namespace Env
-
-class APF {
- public:
-  APF(Grid grid);
-};
+class APF;         // to contain the algorithms for generating an APF map
+class Grid;        // to contain the actual map enviornment
+class Edges;       // to contain the edges of the map
+class FileHandler; // to handle file imports
+} // namespace Env
 
 class Grid {
- public:
+public:
   Grid(void);
   Grid(int w, int h);
   int getWidth();
@@ -40,36 +35,43 @@ class Grid {
   std::pair<int, int> getStart();
   std::pair<int, int> getDest();
 
-  void clearObstacles();                      // clears all obstacles in map
-  void clearPMVs();                           // clears all the PMVs on the map
-  void clearMap();                            // sets all values in map to 0
-  std::string printVal(int x, int y, int z);  // prints out a value from the map
+  void clearObstacles();                     // clears all obstacles in map
+  void clearPMVs();                          // clears all the PMVs on the map
+  void clearMap();                           // sets all values in map to 0
+  std::string printVal(int x, int y, int z); // prints out a value from the map
   // obstacles are stored in [w][h][0]
   // PMVs are stored in [w][h][1]
   std::vector<std::vector<std::vector<int>>>
-      map;  // 3d array to store obstacle and PMV information
+      map; // 3d array to store obstacle and PMV information
 
- private:
+private:
   int height;
   int width;
-  bool checkIndex(int w, int h);  // returns false if index out of bounds
+  std::pair<int, int> start;
+  std::pair<int, int> dest;
+  bool checkIndex(int w, int h); // returns false if index out of bounds
 };
 
 class FileHandler {
- private:
+private:
   bool error;
   void fillGrid(Grid *terrain, std::fstream &f, std::string word,
                 std::string line);
 
- public:
+public:
   std::string *drawGUI(std::string *fileP,
-                       bool *fileLoaded);  // generate the file picker dialog
+                       bool *fileLoaded); // generate the file picker dialog
   FileHandler(void);
 
   // return a pointer to a static grid object
   // if successful, null otherwise
   Grid *importGrid(std::string *filePath, Grid *check);
   void errorMsg(bool *display);
+};
+
+class APF {
+public:
+  APF(Grid grid);
 };
 
 inline void DEVIMPLMSG() { fmt::print("\nFUNCTION NOT IMPLEMENTED"); }
