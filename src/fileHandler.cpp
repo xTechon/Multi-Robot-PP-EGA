@@ -22,7 +22,8 @@ std::string *FileHandler::drawGUI(std::string *fileP, bool *fileLoaded) {
       //  ImGui::Text("%s", fileP);
       //  std::cout << fmt::format("{}", filePathName) << std::endl;
       ImGuiFileDialog::Instance()->Close();
-      *fileLoaded = false; // reset the boolean value to load a new file
+      if (filePathName != "")
+        *fileLoaded = false; // reset the boolean value to load a new file
       // TODO Clear Memory of old loaded map if this is the case
       if (ImGui::GetIO().KeyAlt)
         printf(""); // Set a debugger breakpoint here!
