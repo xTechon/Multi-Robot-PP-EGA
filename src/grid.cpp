@@ -21,13 +21,15 @@ Grid::Grid(int w, int h) {
 }
 
 bool Grid::setObstacle(int w, int h) {
-  if (!checkIndex(w, h)) return false;
+  if (!checkIndex(w, h))
+    return false;
   this->map[w][h][0] = 1;
   return true;
 }
 
 bool Grid::clearObstacle(int w, int h) {
-  if (!checkIndex(w, h)) return false;
+  if (!checkIndex(w, h))
+    return false;
   this->map[w][h][0] = 0;
   return true;
 }
@@ -44,13 +46,15 @@ bool Grid::checkIndex(int w, int h) {
 }
 
 bool Grid::setPMV(int w, int h, int val) {
-  if (!checkIndex(w, h)) return false;
+  if (!checkIndex(w, h))
+    return false;
   this->map[w][h][1] = val;
   return true;
 }
 
 bool Grid::clearPMV(int w, int h) {
-  if (!checkIndex(w, h)) return false;
+  if (!checkIndex(w, h))
+    return false;
   this->map[w][h][1] = 0;
   return true;
 }
@@ -62,9 +66,9 @@ bool Grid::isObstacle(int w, int h) {
 
 int Grid::getPMV(int w, int h) { return this->map[w][h][1]; }
 
-std::pair<int, int> Grid::getStart() { return start; }
+std::pair<int, int> Grid::getStart() { return this->start; }
 
-std::pair<int, int> Grid::getDest() { return dest; }
+std::pair<int, int> Grid::getDest() { return this->dest; }
 
 void Grid::clearObstacles() {
   for (int i = 0; i < this->width; i++) {

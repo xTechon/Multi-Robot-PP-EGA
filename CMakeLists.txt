@@ -84,12 +84,18 @@ FetchContent_Declare(
     URL "https://github.com/epezent/implot/archive/refs/heads/master.tar.gz"
     )
 FetchContent_MakeAvailable(implotgit)
+file(
+  COPY "${implotgit_SOURCE_DIR}/implot.h"
+  DESTINATION "${PROJECT_SOURCE_DIR}/src"
+)
+
+
 set(EXTENSIONS
     #File dialog extension
     ${PROJECT_SOURCE_DIR}/src/ImGuiFileDialog.h
     ${filedialog_SOURCE_DIR}/ImGuiFileDialog.cpp
     #ImPlot extension
-    ${implotgit_SOURCE_DIR}/implot.h
+    ${PROJECT_SOURCE_DIR}/src/implot.h
     ${implotgit_SOURCE_DIR}/implot_internal.h
     ${implotgit_SOURCE_DIR}/implot.cpp
     ${implotgit_SOURCE_DIR}/implot_items.cpp
