@@ -1,9 +1,8 @@
-// DEFINITIONS
-#ifdef _WIN32
-#include <windows.h> //windows only header required
-#endif
-
+#include <fmt/color.h>
 #include <fmt/core.h>
+#ifndef NDEBUG
+#include "debug.h"
+#endif
 
 namespace Env {
 class APF;         // to contain the algorithms for generating an APF map
@@ -16,8 +15,6 @@ namespace EGA {
 class Interact;
 class Genetic;
 } // namespace EGA
-
-inline void DEVIMPLMSG() { fmt::print("\nFUNCTION NOT IMPLEMENTED"); }
 
 // GRID Class TODO:
 // DONE create a grid of size w x h x 2
