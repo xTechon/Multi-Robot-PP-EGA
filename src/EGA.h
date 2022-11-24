@@ -14,7 +14,8 @@ class FileHandler; // to handle file imports
 
 namespace EGA {
 class Interact;
-}
+class Genetic;
+} // namespace EGA
 
 inline void DEVIMPLMSG() { fmt::print("\nFUNCTION NOT IMPLEMENTED"); }
 
