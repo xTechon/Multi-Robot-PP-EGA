@@ -1,5 +1,5 @@
+#include "interact.h"
 #include "implot.h"
-#include "main.h"
 
 void Interact::drawMapTest() {
   static int x[5], y[5];
@@ -24,7 +24,7 @@ void Interact::drawMapTest() {
     xs[i] = 1 + ((int)rand() % 9);
     ys[i] = 1 + ((int)rand() % 9);
   }
-
+  ImGui::Begin("Map Test"); // Start the window
   if (ImPlot::BeginPlot("Map test")) {
     ImPlot::SetupAxes("x", "y");
     ImPlot::PlotLine("border", x, y, 5);
@@ -32,4 +32,5 @@ void Interact::drawMapTest() {
     ImPlot::PlotScatter("Obstacle test", xs, ys, 5);
     ImPlot::EndPlot();
   }
+  ImGui::End();
 }

@@ -1,13 +1,12 @@
 #include "APF.h"
-using namespace std;
 
 APF::APF(Grid grid) {
-  vector<pair<int, int>> open;
-  vector<pair<int, int>> Q;
-  vector<pair<int, int>> temp;
+  std::vector<std::pair<int, int>> open;
+  std::vector<std::pair<int, int>> Q;
+  std::vector<std::pair<int, int>> temp;
 
-  pair<int, int> start = grid.getStart();
-  pair<int, int> dest = grid.getDest();
+  std::pair<int, int> start = grid.getStart();
+  std::pair<int, int> dest = grid.getDest();
 
   int Pq = grid.getWidth() * grid.getHeight();
 
@@ -16,7 +15,7 @@ APF::APF(Grid grid) {
       if (grid.isObstacle(w, h))
         grid.setPMV(w, h, -1);
       else {
-        temp.push_back(make_pair(w, h));
+        temp.push_back(std::make_pair(w, h));
         grid.setPMV(w, h, Pq);
       }
     }
@@ -26,7 +25,7 @@ APF::APF(Grid grid) {
     Q.push_back(temp[0]);
     temp.erase(temp.begin());
 
-    vector<pair<int, int>> N;
+    std::vector<std::pair<int, int>> N;
 
     for (unsigned int i = 0; i < open.size(); i++) {
       if ((open[i].first == Q[0].first - 1 &&
@@ -63,11 +62,11 @@ APF::APF(Grid grid) {
   open.clear();
   temp.clear();
 
-  vector<vector<pair<int, int>>> potPaths;
-  vector<pair<int, int>> initPath;
+  std::vector<std::vector<std::pair<int, int>>> potPaths;
+  std::vector<std::pair<int, int>> initPath;
 
-  random_device rd;
-  mt19937 gen(rd());
+  std::random_device rd;
+  std::mt19937 gen(rd());
 
   for (unsigned int i = 0; i < 2; i++) {
     initPath.push_back(start);
@@ -87,7 +86,7 @@ APF::APF(Grid grid) {
               col + colMod == grid.getWidth())
             break;
           if (grid.getPMV(row + rowMod, col + colMod) > grid.getPMV(row, col))
-            temp.push_back(make_pair(row + rowMod, col + colMod));
+            temp.push_back(std::make_pair(row + rowMod, col + colMod));
 
           colMod--;
         }
@@ -101,11 +100,11 @@ APF::APF(Grid grid) {
         break;
 
       else if (size > 1) {
-        uniform_int_distribution<> rand(0, size - 1);
+        std::uniform_int_distribution<> rand(0, size - 1);
         count = rand(gen);
       }
 
-      initPath.push_back(make_pair(temp[count].first, temp[count].second));
+      initPath.push_back(std::make_pair(temp[count].first, temp[count].second));
 
       if (initPath.back() == dest) {
         potPaths.push_back(initPath);
@@ -116,14 +115,14 @@ APF::APF(Grid grid) {
     initPath.clear();
   }
 
-  vector<vector<pair<int, int>>> potKin;
+  std::vector<std::vector<std::pair<int, int>>> potKin;
   // crossover
   /*if (potPaths[0].size() == potPaths[1].size()) {
     for (int i = 1; i < potPaths[0].size(); i++) {
       int x = (potPaths[0][i].first + potPaths[1][i].first) >> 1;
       int y = (potPaths[0][i].second + potPaths[1][i].second) >> 1;
 
-      initPath.push_back(make_pair(x, y));
+      initPath.push_back(make_std::pair(x, y));
     }
     potKin.push_back(initPath);
     initPath.clear();
@@ -152,8 +151,8 @@ APF::APF(Grid grid) {
   initPath = potPaths[0];
 
   // deletion
-  vector<pair<int, int>> deletion;
-  vector<tuple<float, int, int>> smooth;
+  std::vector<std::pair<int, int>> deletion;
+  std::vector<std::tuple<float, int, int>> smooth;
   for (int i = 1; initPath[i] != dest; i++) {
     int row = initPath[i].first;
     int col = initPath[i].second;
@@ -181,7 +180,7 @@ APF::APF(Grid grid) {
              grid.isObstacle(int(round(midx2)), int(round(midy2))))
       continue;
     else
-      deletion.push_back(make_pair(row, col));
+      deletion.push_back(std::make_pair(row, col));
   }
 
   float length;

@@ -1,4 +1,4 @@
-#include "APF.h"
+#include "grid.h"
 
 int Grid::getWidth() { return width; }
 int Grid::getHeight() { return height; }

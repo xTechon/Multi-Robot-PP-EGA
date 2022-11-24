@@ -1,8 +1,5 @@
-#include <catch2/catch_test_macros.hpp>
-
-#include <cstdint>
-
-#include "../src/APF.h"
+#include "../src/grid.h"
+#include "test.h"
 
 TEST_CASE("Grid Class functions") {
   Grid *sqrRoom = new Grid(10, 10);

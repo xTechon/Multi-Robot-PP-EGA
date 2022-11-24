@@ -1,7 +1,9 @@
 #include "main.h"
+#include "fileHandler.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include "implot.h"
+#include "interact.h"
 
 // Example code from:
 // https://github.com/ocornut/imgui/blob/master/examples/example_glfw_opengl3/main.cpp
