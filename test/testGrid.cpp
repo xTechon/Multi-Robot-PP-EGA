@@ -1,4 +1,4 @@
-#include "../src/grid.h"
+#include "../src/debug.h" //already includes grid.h
 #include "test.h"
 
 TEST_CASE("Grid Class functions") {
@@ -32,7 +32,9 @@ TEST_CASE("Grid Class functions") {
 
 #ifndef NDEBUG
     std::cout << "sqrRoom " << sqrRoom->printVal(9, 9, 0) << std::endl;
+    printGraphObs(sqrRoom);
     std::cout << "recRoom" << recRoom->printVal(4, 9, 0) << std::endl;
+    printGraphObs(recRoom);
 #endif
   }
   SECTION("GRID SETS PMVs") {
@@ -47,7 +49,9 @@ TEST_CASE("Grid Class functions") {
 
 #ifndef NDEBUG
     std::cout << "sqrRoom " << sqrRoom->printVal(0, 0, 1) << std::endl;
+    printGraphAPF(sqrRoom);
     std::cout << "recRoom " << recRoom->printVal(4, 4, 1) << std::endl;
+    printGraphAPF(recRoom);
 #endif
     REQUIRE(sqrRoom->map[0][0][1] == 100);
     REQUIRE(recRoom->map[4][4][1] == 100);
