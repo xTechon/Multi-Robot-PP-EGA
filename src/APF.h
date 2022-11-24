@@ -4,5 +4,6 @@
 
 class APF {
 public:
-  APF(Grid grid);
+  APF(void);
+  void GenerateAPF(Grid *grid); // generates an APF given a grid
 };

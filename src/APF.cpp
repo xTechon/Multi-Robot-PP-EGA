@@ -1,22 +1,22 @@
 #include "APF.h"
 
-APF::APF(Grid grid) {
+void APF::GenerateAPF(Grid *grid) {
   std::vector<std::pair<int, int>> open;
   std::vector<std::pair<int, int>> Q;
   std::vector<std::pair<int, int>> temp;
 
-  std::pair<int, int> start = grid.getStart();
-  std::pair<int, int> dest = grid.getDest();
+  std::pair<int, int> start = grid->getStart();
+  std::pair<int, int> dest = grid->getDest();
 
-  int Pq = grid.getWidth() * grid.getHeight();
+  int Pq = grid->getWidth() * grid->getHeight();
 
-  for (int h = 0; h < grid.getHeight(); h++) {
-    for (int w = 0; w < grid.getWidth(); w++) {
-      if (grid.isObstacle(w, h))
-        grid.setPMV(w, h, -1);
+  for (int h = 0; h < grid->getHeight(); h++) {
+    for (int w = 0; w < grid->getWidth(); w++) {
+      if (grid->isObstacle(w, h))
+        grid->setPMV(w, h, -1);
       else {
         temp.push_back(std::make_pair(w, h));
-        grid.setPMV(w, h, Pq);
+        grid->setPMV(w, h, Pq);
       }
     }
   }
@@ -42,8 +42,8 @@ APF::APF(Grid grid) {
            open[i].second == Q[0].second + 1)) {
         N.push_back(open[i]);
 
-        grid.setPMV(open[i].first, open[i].second,
-                    grid.getPMV(Q[0].first, Q[0].second) - 1);
+        grid->setPMV(open[i].first, open[i].second,
+                     grid->getPMV(Q[0].first, Q[0].second) - 1);
 
         temp.push_back(open[i]);
       }
@@ -82,10 +82,10 @@ APF::APF(Grid grid) {
         int colMod = 1;
         for (int k = 0; k < 3; k++) {
           if (row + rowMod == -1 || col + colMod == -1 ||
-              row + rowMod == grid.getHeight() ||
-              col + colMod == grid.getWidth())
+              row + rowMod == grid->getHeight() ||
+              col + colMod == grid->getWidth())
             break;
-          if (grid.getPMV(row + rowMod, col + colMod) > grid.getPMV(row, col))
+          if (grid->getPMV(row + rowMod, col + colMod) > grid->getPMV(row, col))
             temp.push_back(std::make_pair(row + rowMod, col + colMod));
 
           colMod--;
@@ -168,16 +168,16 @@ APF::APF(Grid grid) {
     float midx2 = float(row + row2) / 2;
     float midy2 = float(col + col2) / 2;
 
-    if (grid.isObstacle(row, col))
+    if (grid->isObstacle(row, col))
       break;
-    else if (grid.isObstacle(midx1, midy1) ||
-             grid.isObstacle(int(round(midx1)), midy1) ||
-             grid.isObstacle(midx1, int(round(midy1))) ||
-             grid.isObstacle(int(round(midx1)), int(round(midy1))) ||
-             grid.isObstacle(midx2, midy2) ||
-             grid.isObstacle(int(round(midx2)), midy2) ||
-             grid.isObstacle(midx2, int(round(midy2))) ||
-             grid.isObstacle(int(round(midx2)), int(round(midy2))))
+    else if (grid->isObstacle(midx1, midy1) ||
+             grid->isObstacle(int(round(midx1)), midy1) ||
+             grid->isObstacle(midx1, int(round(midy1))) ||
+             grid->isObstacle(int(round(midx1)), int(round(midy1))) ||
+             grid->isObstacle(midx2, midy2) ||
+             grid->isObstacle(int(round(midx2)), midy2) ||
+             grid->isObstacle(midx2, int(round(midy2))) ||
+             grid->isObstacle(int(round(midx2)), int(round(midy2))))
       continue;
     else
       deletion.push_back(std::make_pair(row, col));
