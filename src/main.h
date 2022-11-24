@@ -4,4 +4,6 @@
 #include <math.h>
 #include <stdio.h>
 
-#include "EGA.h"
+#ifdef _WIN32
+#include <windows.h> //windows only header required
+#endif
