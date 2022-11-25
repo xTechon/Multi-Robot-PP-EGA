@@ -4,6 +4,9 @@
   #include "debug.h"
 #endif
 
+#ifndef EGenA
+  #define EGenA
+
 namespace Env {
 class APF;         // to contain the algorithms for generating an APF map
 class Grid;        // to contain the actual map enviornment
@@ -23,7 +26,7 @@ class Genetic;
 // DONE: ability to set map potentials
 
 // GRID GUI TODO:
-// TODO: import maps from gui
+// DONE import maps from gui
 // TODO: edit maps from gui
 // TODO: export maps from gui
 
@@ -45,3 +48,4 @@ class Genetic;
 // TODO: set start and end points in gui
 // TODO: view potential map overlay
 // TODO: view all/subset of generated solution paths
+#endif

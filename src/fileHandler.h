@@ -1,5 +1,8 @@
 #include "grid.h"
 
+#ifndef FILEHANDLER
+  #define FILEHANDLER
+
 class FileHandler {
 private:
   bool error;
@@ -13,3 +16,4 @@ public:
   Grid* importGrid(std::string* filePath, Grid* check);
   void errorMsg(bool* display);
 };
+#endif

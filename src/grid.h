@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <vector>
 
+#ifndef GRID
+  #define GRID
+
 class Grid {
 public:
   Grid(void);
@@ -37,3 +40,4 @@ private:
   std::pair<int, int> dest;
   bool checkIndex(int w, int h); // returns false if index out of bounds
 };
+#endif

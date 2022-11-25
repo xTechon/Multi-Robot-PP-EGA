@@ -3,6 +3,9 @@
 #include <random>
 #include <tuple>
 
+#ifndef GENETIC_ALGORITHM
+  #define GENETIC_ALGORITHM
+
 class Genetic {
   Grid* terrain;                                          // reference to grid for other functions
   std::vector<std::vector<std::pair<int, int>>> potPaths; // vector of potential paths
@@ -18,3 +21,4 @@ public:
   void deletion();
   void mutation();
 };
+#endif
