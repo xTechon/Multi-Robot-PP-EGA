@@ -2,6 +2,7 @@
 Language:        Cpp
 # BasedOnStyle:  Microsoft
 AccessModifierOffset: -2
+ColumnLimit:     125
 AlignAfterOpenBracket: Align
 AlignArrayOfStructures: Right
 AlignConsecutiveMacros: AcrossComments
@@ -50,7 +51,7 @@ BraceWrapping:
   SplitEmptyRecord: true
   SplitEmptyNamespace: true
 BreakAfterJavaFieldAnnotations: false
-BreakBeforeBinaryOperators: None
+BreakBeforeBinaryOperators: All
 BreakBeforeConceptDeclarations: true
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeComma
@@ -58,7 +59,6 @@ BreakInheritanceList: AfterColon
 BreakStringLiterals: true
 BreakBeforeInheritanceComma: false
 BreakConstructorInitializersBeforeComma: true
-ColumnLimit:     138
 CommentPragmas:  '^ IWYU pragma:'
 CompactNamespaces: false
 ConstructorInitializerIndentWidth: 4
