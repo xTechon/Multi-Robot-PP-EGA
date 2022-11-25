@@ -1,4 +1,5 @@
 #include "interact.h"
+
 #include "implot.h"
 
 void Interact::drawMapTest() {
@@ -21,8 +22,8 @@ void Interact::drawMapTest() {
   static int xs[5], ys[5];
   srand(0);
   for (int i = 0; i < 5; i++) {
-    xs[i] = 1 + ((int)rand() % 9);
-    ys[i] = 1 + ((int)rand() % 9);
+    xs[i] = 1 + ((int) rand() % 9);
+    ys[i] = 1 + ((int) rand() % 9);
   }
   ImGui::Begin("Map Test"); // Start the window
   if (ImPlot::BeginPlot("Map test")) {

@@ -1,7 +1,7 @@
 #include <fmt/color.h>
 #include <fmt/core.h>
 #ifndef NDEBUG
-#include "debug.h"
+  #include "debug.h"
 #endif
 
 namespace Env {

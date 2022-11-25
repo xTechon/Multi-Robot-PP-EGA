@@ -1,35 +1,32 @@
 #include "grid.h"
 
 int Grid::getWidth() { return width; }
+
 int Grid::getHeight() { return height; }
 
 // default values for a grid size
 Grid::Grid(void) {
-  this->width = 10;
+  this->width  = 10;
   this->height = 10;
-  this->map = std::vector<std::vector<std::vector<int>>>(
-      this->width,
-      std::vector<std::vector<int>>(this->height, std::vector<int>(2, 0)));
+  this->map    = std::vector<std::vector<std::vector<int>>>(
+      this->width, std::vector<std::vector<int>>(this->height, std::vector<int>(2, 0)));
 }
 
 Grid::Grid(int w, int h) {
-  this->width = w;
+  this->width  = w;
   this->height = h;
-  this->map = std::vector<std::vector<std::vector<int>>>(
-      this->width,
-      std::vector<std::vector<int>>(this->height, std::vector<int>(2, 0)));
+  this->map    = std::vector<std::vector<std::vector<int>>>(
+      this->width, std::vector<std::vector<int>>(this->height, std::vector<int>(2, 0)));
 }
 
 bool Grid::setObstacle(int w, int h) {
-  if (!checkIndex(w, h))
-    return false;
+  if (!checkIndex(w, h)) return false;
   this->map[w][h][0] = 1;
   return true;
 }
 
 bool Grid::clearObstacle(int w, int h) {
-  if (!checkIndex(w, h))
-    return false;
+  if (!checkIndex(w, h)) return false;
   this->map[w][h][0] = 0;
   return true;
 }
@@ -41,27 +38,23 @@ bool Grid::checkIndex(int w, int h) {
     std::cout << fmt::format("ERROR: INDEX OUT OF BOUNDS") << std::endl;
 #endif
     return false;
-  } else
-    return true;
+  } else return true;
 }
 
 bool Grid::setPMV(int w, int h, int val) {
-  if (!checkIndex(w, h))
-    return false;
+  if (!checkIndex(w, h)) return false;
   this->map[w][h][1] = val;
   return true;
 }
 
 bool Grid::clearPMV(int w, int h) {
-  if (!checkIndex(w, h))
-    return false;
+  if (!checkIndex(w, h)) return false;
   this->map[w][h][1] = 0;
   return true;
 }
 
 bool Grid::isObstacle(int w, int h) {
-  return this->map[w][h][0] == 1 || w < 0 || h < 0 || w == this->width ||
-         h == this->height;
+  return this->map[w][h][0] == 1 || w < 0 || h < 0 || w == this->width || h == this->height;
 }
 
 int Grid::getPMV(int w, int h) { return this->map[w][h][1]; }
@@ -95,7 +88,6 @@ void Grid::clearMap() {
 
 std::string Grid::printVal(int x, int y, int z) {
   std::string result;
-  result =
-      fmt::format("value at ({}, {}, {}): {}", x, y, z, this->map[x][y][z]);
+  result = fmt::format("value at ({}, {}, {}): {}", x, y, z, this->map[x][y][z]);
   return result;
 }

@@ -1,13 +1,13 @@
 #include "fileHandler.h"
+
 #include "ImGuiFileDialog.h"
 
 FileHandler::FileHandler() { this->error = false; }
 
-std::string *FileHandler::drawGUI(std::string *fileP, bool *fileLoaded) {
+std::string* FileHandler::drawGUI(std::string* fileP, bool* fileLoaded) {
   // open Dialog Simple std::cout << fmt::format("DrawGUI");
   if (ImGui::Button("Open File Dialog")) {
-    ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File",
-                                            ".txt, .csv", ".");
+    ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".txt, .csv", ".");
   }
   static std::string filePathName;
   static std::string filePath;
@@ -16,17 +16,15 @@ std::string *FileHandler::drawGUI(std::string *fileP, bool *fileLoaded) {
     // action if OK
     if (ImGuiFileDialog::Instance()->IsOk()) {
       filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-      filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+      filePath     = ImGuiFileDialog::Instance()->GetCurrentPath();
       // const char *fileP = filePathName.c_str();
       //  action
       //  ImGui::Text("%s", fileP);
       //  std::cout << fmt::format("{}", filePathName) << std::endl;
       ImGuiFileDialog::Instance()->Close();
-      if (filePathName != "")
-        *fileLoaded = false; // reset the boolean value to load a new file
+      if (filePathName != "") *fileLoaded = false; // reset the boolean value to load a new file
       // TODO Clear Memory of old loaded map if this is the case
-      if (ImGui::GetIO().KeyAlt)
-        printf(""); // Set a debugger breakpoint here!
+      if (ImGui::GetIO().KeyAlt) printf(""); // Set a debugger breakpoint here!
       return &filePathName;
     }
 
@@ -34,17 +32,16 @@ std::string *FileHandler::drawGUI(std::string *fileP, bool *fileLoaded) {
     ImGuiFileDialog::Instance()->Close();
     return nullptr;
   }
-  if (fileP != nullptr)
-    return fileP;
+  if (fileP != nullptr) return fileP;
   return nullptr;
 }
 
-Grid *FileHandler::importGrid(std::string *filePath, Grid *check) {
+Grid* FileHandler::importGrid(std::string* filePath, Grid* check) {
   int x = 0, y = 0; // init the length and height of the map
   std::string line, word;
   static Grid terrain;
   std::fstream fin(*filePath, std::ios::in); // open the file for reading
-  if ((fin.is_open()) && (check == (Grid *)nullptr)) {
+  if ((fin.is_open()) && (check == (Grid*) nullptr)) {
     getline(fin, line);
     std::stringstream str(line);
     getline(str, word, ',');
@@ -54,21 +51,20 @@ Grid *FileHandler::importGrid(std::string *filePath, Grid *check) {
 
     terrain = Grid(x, y);                // init a new map of size x,y
     fillGrid(&terrain, fin, word, line); // fill the grid with info from file
-  } else if (check != (Grid *)nullptr) {
+  } else if (check != (Grid*) nullptr) {
     return check; // check has already been set, just return it's value
   } else {
 #ifndef TESTS
     errorMsg(&(this->error));
 #endif
     std::cout << fmt::format("FILE NOT FOUND") << std::endl;
-    return (Grid *)nullptr;
+    return (Grid*) nullptr;
   }
   fin.close();
   return &terrain;
 }
 
-void FileHandler::fillGrid(Grid *terrain, std::fstream &f, std::string word,
-                           std::string line) {
+void FileHandler::fillGrid(Grid* terrain, std::fstream& f, std::string word, std::string line) {
   for (int i = 0; i < terrain->getWidth(); i++) { // Rows
     getline(f, line);
     std::stringstream str(line);
@@ -81,10 +77,9 @@ void FileHandler::fillGrid(Grid *terrain, std::fstream &f, std::string word,
   }
 }
 
-void FileHandler::errorMsg(bool *display) {
+void FileHandler::errorMsg(bool* display) {
   ImGui::Begin("ERROR", display);
   ImGui::Text("The file could not be opened for importing");
-  if (ImGui::Button("Close"))
-    *display = false;
+  if (ImGui::Button("Close")) *display = false;
   ImGui::End();
 }

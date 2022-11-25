@@ -1,19 +1,18 @@
 #include "APF.h"
 
-void APF::GenerateAPF(Grid *grid) {
+void APF::GenerateAPF(Grid* grid) {
   std::vector<std::pair<int, int>> open;
   std::vector<std::pair<int, int>> Q;
   std::vector<std::pair<int, int>> temp;
 
   std::pair<int, int> start = grid->getStart();
-  std::pair<int, int> dest = grid->getDest();
+  std::pair<int, int> dest  = grid->getDest();
 
   int Pq = grid->getWidth() * grid->getHeight();
 
   for (int h = 0; h < grid->getHeight(); h++) {
     for (int w = 0; w < grid->getWidth(); w++) {
-      if (grid->isObstacle(w, h))
-        grid->setPMV(w, h, -1);
+      if (grid->isObstacle(w, h)) grid->setPMV(w, h, -1);
       else {
         temp.push_back(std::make_pair(w, h));
         grid->setPMV(w, h, Pq);
@@ -28,22 +27,17 @@ void APF::GenerateAPF(Grid *grid) {
     std::vector<std::pair<int, int>> N;
 
     for (unsigned int i = 0; i < open.size(); i++) {
-      if ((open[i].first == Q[0].first - 1 &&
-           open[i].second == Q[0].second - 1) ||
-          (open[i].first == Q[0].first - 1 && open[i].second == Q[0].second) ||
-          (open[i].first == Q[0].first - 1 &&
-           open[i].second == Q[0].second + 1) ||
-          (open[i].first == Q[0].first && open[i].second == Q[0].second - 1) ||
-          (open[i].first == Q[0].first && open[i].second == Q[0].second + 1) ||
-          (open[i].first == Q[0].first + 1 &&
-           open[i].second == Q[0].second - 1) ||
-          (open[i].first == Q[0].first + 1 && open[i].second == Q[0].second) ||
-          (open[i].first == Q[0].first + 1 &&
-           open[i].second == Q[0].second + 1)) {
+      if ((open[i].first == Q[0].first - 1 && open[i].second == Q[0].second - 1)
+          || (open[i].first == Q[0].first - 1 && open[i].second == Q[0].second)
+          || (open[i].first == Q[0].first - 1 && open[i].second == Q[0].second + 1)
+          || (open[i].first == Q[0].first && open[i].second == Q[0].second - 1)
+          || (open[i].first == Q[0].first && open[i].second == Q[0].second + 1)
+          || (open[i].first == Q[0].first + 1 && open[i].second == Q[0].second - 1)
+          || (open[i].first == Q[0].first + 1 && open[i].second == Q[0].second)
+          || (open[i].first == Q[0].first + 1 && open[i].second == Q[0].second + 1)) {
         N.push_back(open[i]);
 
-        grid->setPMV(open[i].first, open[i].second,
-                     grid->getPMV(Q[0].first, Q[0].second) - 1);
+        grid->setPMV(open[i].first, open[i].second, grid->getPMV(Q[0].first, Q[0].second) - 1);
 
         temp.push_back(open[i]);
       }
@@ -62,12 +56,15 @@ void APF::GenerateAPF(Grid *grid) {
   open.clear();
   temp.clear();
 
+  /*
   std::vector<std::vector<std::pair<int, int>>> potPaths;
   std::vector<std::pair<int, int>> initPath;
 
   std::random_device rd;
   std::mt19937 gen(rd());
-
+*/
+  /*
+  // Generate the inital path to run genetic operations on
   for (unsigned int i = 0; i < 2; i++) {
     initPath.push_back(start);
 
@@ -114,8 +111,9 @@ void APF::GenerateAPF(Grid *grid) {
 
     initPath.clear();
   }
+*/
+  // std::vector<std::vector<std::pair<int, int>>> potKin;
 
-  std::vector<std::vector<std::pair<int, int>>> potKin;
   // crossover
   /*if (potPaths[0].size() == potPaths[1].size()) {
     for (int i = 1; i < potPaths[0].size(); i++) {
@@ -148,6 +146,7 @@ void APF::GenerateAPF(Grid *grid) {
   }
   potKin.push_back(initPath);*/
 
+  /*
   initPath = potPaths[0];
 
   // deletion
@@ -213,4 +212,5 @@ void APF::GenerateAPF(Grid *grid) {
     else if (turn90)
       rough += 2;
   }
+  */
 }

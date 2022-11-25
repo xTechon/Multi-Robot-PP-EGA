@@ -28,8 +28,7 @@ public:
   std::string printVal(int x, int y, int z); // prints out a value from the map
   // obstacles are stored in [w][h][0]
   // PMVs are stored in [w][h][1]
-  std::vector<std::vector<std::vector<int>>>
-      map; // 3d array to store obstacle and PMV information
+  std::vector<std::vector<std::vector<int>>> map; // 3d array to store obstacle and PMV information
 
 private:
   int height;

@@ -2,9 +2,9 @@
 #include "test.h"
 
 TEST_CASE("Grid Class functions") {
-  Grid *sqrRoom = new Grid(10, 10);
-  Grid *recRoom = new Grid(5, 10);
-  Grid *hallway = new Grid(2, 1);
+  Grid* sqrRoom = new Grid(10, 10);
+  Grid* recRoom = new Grid(5, 10);
+  Grid* hallway = new Grid(2, 1);
 
   REQUIRE(sqrRoom->getWidth() == 10);
   REQUIRE(sqrRoom->getHeight() == 10);
@@ -90,8 +90,9 @@ TEST_CASE("Grid Class functions") {
     REQUIRE(hallway->map[1][0][1] == 0);
   }
 }
+
 TEST_CASE("Grid Deconstruction") {
-  Grid *shed = new Grid(); // init a 10 by 10 square
+  Grid* shed = new Grid(); // init a 10 by 10 square
   // set obstacltes
   shed->setObstacle(0, 0);
   shed->setObstacle(0, 1);
