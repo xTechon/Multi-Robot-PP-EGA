@@ -7,7 +7,7 @@ FileHandler::FileHandler() { this->error = false; }
 std::string* FileHandler::drawGUI(std::string* fileP, bool* fileLoaded) {
   // open Dialog Simple std::cout << fmt::format("DrawGUI");
   if (ImGui::Button("Open File Dialog")) {
-    ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".txt, .csv", ".");
+    ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".*", ".");
   }
   static std::string filePathName;
   static std::string filePath;
@@ -22,7 +22,7 @@ std::string* FileHandler::drawGUI(std::string* fileP, bool* fileLoaded) {
       //  ImGui::Text("%s", fileP);
       //  std::cout << fmt::format("{}", filePathName) << std::endl;
       ImGuiFileDialog::Instance()->Close();
-      if (filePathName != "") *fileLoaded = false; // reset the boolean value to load a new file
+      *fileLoaded = false; // reset the boolean value to load a new file
       // TODO Clear Memory of old loaded map if this is the case
       if (ImGui::GetIO().KeyAlt) printf(""); // Set a debugger breakpoint here!
       return &filePathName;

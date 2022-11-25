@@ -1,5 +1,6 @@
 #include "interact.h"
 
+#include "imgui.h"
 #include "implot.h"
 
 void Interact::drawMapTest() {
@@ -34,4 +35,35 @@ void Interact::drawMapTest() {
     ImPlot::EndPlot();
   }
   ImGui::End();
+}
+
+void Interact::drawMapObs(Grid* map) {
+  std::vector<int> x;
+  std::vector<int> y;
+  // std::vector<std::pair<int, int>> xy;
+  int count = 0;
+  // store obstacles as points
+  for (int i = 0; i < map->getWidth(); i++) {
+    for (int j = 0; j < map->getHeight(); j++) {
+      if (map->isObstacle(i, j)) {
+        x.push_back(i);
+        y.push_back(j);
+        // xy.push_back(std::make_pair(i, j));
+        count++;
+      }
+    }
+  }
+
+  ImGui::Begin("Imported Map");
+  if (ImPlot::BeginPlot("Imported Map")) {
+    ImPlot::SetupAxes("x", "y");
+    // ImPlot::PlotScatter("Obstacle", x, y, count);
+    // ImPlot::PlotScatterG("Obstacle", x, y, count);
+    // ImPlot::PlotScatter("Obstacle", xy, count);
+    // TODO: change color of scatter plot
+    // TODO: add border line
+    ImPlot::PlotScatter("Obstacle", &x[0], &y[0], count);
+    ImPlot::EndPlot();
+    ImGui::End();
+  }
 }

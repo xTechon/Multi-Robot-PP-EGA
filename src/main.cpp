@@ -84,6 +84,7 @@ int main(int, char**) {
           // load the terrain
           terrain = filePicker->importGrid(filePath, terrain);
           ImGui::Text("Terrain Loaded");
+          fileLoad = true;
           // Breakpoint toggle
           if (ImGui::GetIO().KeyAlt) {
             printf(""); // Set a debugger breakpoint here!
@@ -104,7 +105,9 @@ int main(int, char**) {
       ImGui::End();
     }
 
-    plots->drawMapTest();
+    // plots->drawMapTest();
+    // Render Map
+    if (fileLoad == true) { plots->drawMapObs(terrain); }
 
     // Rendering
     ImGui::Render();

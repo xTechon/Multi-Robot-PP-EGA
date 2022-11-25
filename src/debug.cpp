@@ -9,7 +9,7 @@ void printGraphObs(Grid* grid) {
         std::cout << fmt::format(fmt::emphasis::faint | fg(fmt::color::dark_cyan), "{:>4d}", 0);
       }
     }
-    std::cout << std::endl << std::endl;
+    std::cout << std::endl;
   }
 }
 
@@ -22,6 +22,6 @@ void printGraphAPF(Grid* grid) {
         std::cout << fmt::format(fmt::emphasis::faint | fg(fmt::color::dark_cyan), "{:>4d}", grid->map[i][j][1]);
       }
     }
-    std::cout << std::endl << std::endl;
+    std::cout << std::endl;
   }
 }
