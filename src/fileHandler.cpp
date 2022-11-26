@@ -4,10 +4,10 @@
 
 FileHandler::FileHandler() { this->error = false; }
 
-std::string* FileHandler::drawGUI(std::string* fileP, bool* fileLoaded) {
+std::string* FileHandler::drawGUI(std::string* fileP) {
   // open Dialog Simple std::cout << fmt::format("DrawGUI");
   if (ImGui::Button("Open File Dialog")) {
-    ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".*", ".");
+    ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".txt,.csv", ".");
   }
   static std::string filePathName;
   static std::string filePath;
@@ -22,8 +22,6 @@ std::string* FileHandler::drawGUI(std::string* fileP, bool* fileLoaded) {
       //  ImGui::Text("%s", fileP);
       //  std::cout << fmt::format("{}", filePathName) << std::endl;
       ImGuiFileDialog::Instance()->Close();
-      *fileLoaded = false; // reset the boolean value to load a new file
-      // TODO Clear Memory of old loaded map if this is the case
       if (ImGui::GetIO().KeyAlt) printf(""); // Set a debugger breakpoint here!
       return &filePathName;
     }
@@ -39,7 +37,7 @@ std::string* FileHandler::drawGUI(std::string* fileP, bool* fileLoaded) {
 Grid* FileHandler::importGrid(std::string* filePath, Grid* check) {
   int x = 0, y = 0; // init the length and height of the map
   std::string line, word;
-  static Grid terrain;
+  static Grid* terrain;
   std::fstream fin(*filePath, std::ios::in); // open the file for reading
   if ((fin.is_open()) && (check == (Grid*) nullptr)) {
     getline(fin, line);
@@ -49,8 +47,8 @@ Grid* FileHandler::importGrid(std::string* filePath, Grid* check) {
     getline(str, word, ',');
     y = stoi(word); // set y
 
-    terrain = Grid(x, y);                // init a new map of size x,y
-    fillGrid(&terrain, fin, word, line); // fill the grid with info from file
+    terrain = new Grid(x, y);           // init a new map of size x,y
+    fillGrid(terrain, fin, word, line); // fill the grid with info from file
   } else if (check != (Grid*) nullptr) {
     return check; // check has already been set, just return it's value
   } else {
@@ -61,7 +59,7 @@ Grid* FileHandler::importGrid(std::string* filePath, Grid* check) {
     return (Grid*) nullptr;
   }
   fin.close();
-  return &terrain;
+  return terrain;
 }
 
 void FileHandler::fillGrid(Grid* terrain, std::fstream& f, std::string word, std::string line) {

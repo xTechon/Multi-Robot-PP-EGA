@@ -70,27 +70,34 @@ int main(int, char**) {
     {
       static float f     = 0.0f;
       static int counter = 0;
-      ImGui::Begin("Hello world!");
-      ImGui::Text("Some useful text.");
-      ImGui::Checkbox("Another Window", &show_another_window);
-      ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-      ImGui::ColorEdit3("clear color", (float*) &clear_color);
-      filePath = filePicker->drawGUI(filePath, &fileLoad);
+
+      ImGui::Begin("Enhanced Genetic Path Planning Algorithm");
+      ImGui::Text("Select a properly formatted txt or csv file using the button below");
+      // ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+      // ImGui::ColorEdit3("clear color", (float*) &clear_color);
+      filePath = filePicker->drawGUI(filePath);
       if (filePath != nullptr) {
         const char* file = filePath->c_str();
         ImGui::Text("File Choosen:\n%s", file);
         // std::cout << fmt::format("{}", *fileP) << std::endl;
-        if (fileLoad == false) {
-          // load the terrain
-          terrain = filePicker->importGrid(filePath, terrain);
-          ImGui::Text("Terrain Loaded");
-          fileLoad = true;
-          // Breakpoint toggle
-          if (ImGui::GetIO().KeyAlt) {
-            printf(""); // Set a debugger breakpoint here!
-          }
+        // load the terrain
+        terrain = filePicker->importGrid(filePath, terrain);
+        ImGui::Text("Terrain Loaded");
+        fileLoad = true;
+        //  Breakpoint toggle
+        if (ImGui::GetIO().KeyAlt) {
+          printf(""); // Set a debugger breakpoint here!
         }
       }
+      ImGui::Checkbox("Display Loaded Map", &show_another_window);
+      if (ImGui::Button("Reset Loaded Map")) {
+        delete terrain;
+        terrain             = (Grid*) nullptr;
+        show_another_window = false;
+        filePath            = nullptr;
+        fileLoad            = false;
+      }
+
       if (ImGui::GetIO().KeyAlt) {
         printf(""); // Set a debugger breakpoint here!
       }
@@ -98,16 +105,17 @@ int main(int, char**) {
       ImGui::End();
     }
 
-    if (show_another_window) {
-      ImGui::Begin("Another Window", &show_another_window);
-      ImGui::Text("Hi Another Window, I'm Dad!");
-      if (ImGui::Button("Close Me")) show_another_window = false;
+    if (show_another_window && fileLoad) {
+      ImGui::Begin("Map control", &show_another_window);
+      // ImGui::Text("Hi Another Window, I'm Dad!");
+      plots->drawMapObs(terrain); // display the map
+      if (ImGui::Button("Close this window")) show_another_window = false;
       ImGui::End();
     }
 
     // plots->drawMapTest();
     // Render Map
-    if (fileLoad == true) { plots->drawMapObs(terrain); }
+    // if (fileLoad == true) { plots->drawMapObs(terrain); }
 
     // Rendering
     ImGui::Render();

@@ -10,7 +10,7 @@ private:
 
 public:
   FileHandler(void);
-  std::string* drawGUI(std::string* fileP, bool* fileLoaded); // generate the file picker dialog
+  std::string* drawGUI(std::string* fileP); // generate the file picker dialog
   // return a pointer to a static grid object
   // if successful, null otherwise
   Grid* importGrid(std::string* filePath, Grid* check);
