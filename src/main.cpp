@@ -1,5 +1,6 @@
 #include "main.h"
 
+#include "debug.h"
 #include "fileHandler.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -54,7 +55,7 @@ int main(int, char**) {
   FileHandler* filePicker = new FileHandler();
   bool fileLoad           = false;
   Grid* terrain           = (Grid*) nullptr;
-  Interact* plots         = new Interact();
+  static Interact* plots  = (Interact*) nullptr;
 
   // Main window loop
   while (!glfwWindowShouldClose(window)) {
@@ -66,33 +67,36 @@ int main(int, char**) {
     ImGui::NewFrame();
 
     // windows here
-    // simple window
     {
-      static float f     = 0.0f;
-      static int counter = 0;
+      // static float f     = 0.0f;
+      // static int counter = 0;
 
       ImGui::Begin("Enhanced Genetic Path Planning Algorithm");
       ImGui::Text("Select a properly formatted txt or csv file using the button below");
-      // ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-      // ImGui::ColorEdit3("clear color", (float*) &clear_color);
       filePath = filePicker->drawGUI(filePath);
       if (filePath != nullptr) {
         const char* file = filePath->c_str();
-        ImGui::Text("File Choosen:\n%s", file);
-        // std::cout << fmt::format("{}", *fileP) << std::endl;
-        // load the terrain
-        terrain = filePicker->importGrid(filePath, terrain);
-        ImGui::Text("Terrain Loaded");
-        fileLoad = true;
-        //  Breakpoint toggle
+        ImGui::Text("File Choosen:\n%s", file);               // show choosen filepath
+        terrain  = filePicker->importGrid(filePath, terrain); // load the terrain
+        plots    = new Interact(terrain);                     // initalize plots to generate a border
+        fileLoad = true;                                      // set safety variable for a loaded file
+        ImGui::Text("Terrain Loaded");                        // let user know terrain loaded
+
         if (ImGui::GetIO().KeyAlt) {
           printf(""); // Set a debugger breakpoint here!
         }
       }
+
+      // checkbox to display a loaded map
       ImGui::Checkbox("Display Loaded Map", &show_another_window);
+
+      // Button to reset values to load a new map
       if (ImGui::Button("Reset Loaded Map")) {
+        // free memory to load new map
         delete terrain;
+        delete plots;
         terrain             = (Grid*) nullptr;
+        plots               = (Interact*) nullptr;
         show_another_window = false;
         filePath            = nullptr;
         fileLoad            = false;
@@ -105,17 +109,14 @@ int main(int, char**) {
       ImGui::End();
     }
 
+    // Window for displaying and controling map values
     if (show_another_window && fileLoad) {
       ImGui::Begin("Map control", &show_another_window);
-      // ImGui::Text("Hi Another Window, I'm Dad!");
+      ImGui::Text("Right click anywhere on the plot to display options");
       plots->drawMapObs(terrain); // display the map
       if (ImGui::Button("Close this window")) show_another_window = false;
       ImGui::End();
     }
-
-    // plots->drawMapTest();
-    // Render Map
-    // if (fileLoad == true) { plots->drawMapObs(terrain); }
 
     // Rendering
     ImGui::Render();

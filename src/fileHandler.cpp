@@ -63,10 +63,10 @@ Grid* FileHandler::importGrid(std::string* filePath, Grid* check) {
 }
 
 void FileHandler::fillGrid(Grid* terrain, std::fstream& f, std::string word, std::string line) {
-  for (int i = 0; i < terrain->getWidth(); i++) { // Rows
+  for (int j = (terrain->getHeight() - 1); j >= 0; j--) { // Columns
     getline(f, line);
     std::stringstream str(line);
-    for (int j = 0; j < terrain->getHeight(); j++) { // Columns
+    for (int i = 0; i < terrain->getWidth(); i++) { // Rows
       getline(str, word, ',');
       if (stoi(word) == 1) {
         terrain->setObstacle(i, j); // set the obstacle at that point

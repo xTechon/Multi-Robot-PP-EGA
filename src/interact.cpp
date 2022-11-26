@@ -57,13 +57,27 @@ void Interact::drawMapObs(Grid* map) {
   ImGui::Begin("Imported Map");
   if (ImPlot::BeginPlot("Imported Map")) {
     ImPlot::SetupAxes("x", "y");
-    // ImPlot::PlotScatter("Obstacle", x, y, count);
-    // ImPlot::PlotScatterG("Obstacle", x, y, count);
-    // ImPlot::PlotScatter("Obstacle", xy, count);
-    // TODO: change color of scatter plot
-    // TODO: add border line
+    ImPlot::PlotLine("border", this->borderx, this->bordery, 5);
+    ImPlot::SetNextMarkerStyle(ImPlotMarker_Circle);
     ImPlot::PlotScatter("Obstacle", &x[0], &y[0], count);
     ImPlot::EndPlot();
     ImGui::End();
   }
+}
+
+Interact::Interact(Grid* map) {
+  this->borderx[0] = 0;
+  this->bordery[0] = 0;
+
+  this->borderx[1] = map->getWidth() - 1;
+  this->bordery[1] = 0;
+
+  this->borderx[2] = map->getWidth() - 1;
+  this->bordery[2] = map->getHeight() - 1;
+
+  this->borderx[3] = 0;
+  this->bordery[3] = map->getHeight() - 1;
+
+  this->borderx[4] = 0;
+  this->bordery[4] = 0;
 }
