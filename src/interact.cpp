@@ -3,7 +3,7 @@
 #include "imgui.h"
 #include "implot.h"
 
-void Interact::drawMapObs(Grid* map) {
+void Interact::drawMapObs(Grid* map, std::string& fileName) {
   std::vector<int> x;
   std::vector<int> y;
   // std::vector<std::pair<int, int>> xy;
@@ -21,8 +21,9 @@ void Interact::drawMapObs(Grid* map) {
   }
 
   static ImPlotLocation loc = ImPlotLocation_NorthWest;
+  const char* file          = fileName.c_str();
   // ImGui::Begin("Imported Map");
-  if (ImPlot::BeginPlot("Imported Map")) {
+  if (ImPlot::BeginPlot(file)) {
     ImPlotLegendFlags flags = ImPlotLegendFlags_None;
     flags |= ImPlotLegendFlags_Outside;
     ImPlot::SetupLegend(loc, flags);

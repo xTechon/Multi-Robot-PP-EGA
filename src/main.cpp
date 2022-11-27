@@ -58,6 +58,7 @@ int main(int, char**) {
   Grid* terrain           = (Grid*) nullptr;
   Interact* plots         = new Interact();
 
+  ImGuiWindowFlags flags = ImGuiWindowFlags_AlwaysAutoResize;
   // Main window loop
   while (!glfwWindowShouldClose(window)) {
     glfwPollEvents();
@@ -72,7 +73,7 @@ int main(int, char**) {
       // static float f     = 0.0f;
       // static int counter = 0;
 
-      ImGui::Begin("Enhanced Genetic Path Planning Algorithm");
+      ImGui::Begin("Enhanced Genetic Path Planning Algorithm", NULL, flags);
       ImGui::Text("Select a properly formatted txt or csv file using the button below");
       fileInfo = filePicker->drawGUI(fileInfo);
       if (fileInfo != nullptr) filePath = &(*fileInfo)[0];
@@ -103,16 +104,19 @@ int main(int, char**) {
         show_another_window = false;
         filePath            = nullptr;
         fileLoad            = false;
+        // clear values from vector
         fileInfo->pop_back();
         fileInfo->pop_back();
         fileInfo->pop_back();
+        // remove referece to vector
         fileInfo = nullptr;
       }
 
       if (ImGui::GetIO().KeyAlt) {
         printf(""); // Set a debugger breakpoint here!
       }
-
+      ImGui::Text("\n\n");
+      if (ImGui::Button("Quit")) break; // QUIT button
       ImGui::End();
     }
 
@@ -120,7 +124,7 @@ int main(int, char**) {
     if (show_another_window && fileLoad) {
       ImGui::Begin("Map control", &show_another_window);
       ImGui::Text("Right click anywhere on the plot to display options");
-      plots->drawMapObs(terrain); // display the map
+      plots->drawMapObs(terrain, (*fileInfo)[2]); // display the map
       if (ImGui::Button("Close this window")) show_another_window = false;
       ImGui::End();
     }
