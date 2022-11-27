@@ -58,6 +58,7 @@ void Interact::resizeBorder(Grid* map) {
   this->bordery[4] = 0;
 }
 
+// class constructor
 Interact::Interact() {
   // initalize arrays with 0s
   this->clearBorder();
@@ -69,3 +70,5 @@ void Interact::clearBorder() {
     this->bordery[i] = 0;
   }
 }
+
+void addStartAndDest() { }

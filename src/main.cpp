@@ -49,7 +49,8 @@ int main(int, char**) {
   ImVec4 clear_color       = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
   // filePath variables
-  std::string* filePath = nullptr;
+  std::vector<std::string>* fileInfo = nullptr;
+  std::string* filePath              = nullptr;
 
   // file loader variables
   FileHandler* filePicker = new FileHandler();
@@ -73,7 +74,8 @@ int main(int, char**) {
 
       ImGui::Begin("Enhanced Genetic Path Planning Algorithm");
       ImGui::Text("Select a properly formatted txt or csv file using the button below");
-      filePath = filePicker->drawGUI(filePath);
+      fileInfo = filePicker->drawGUI(fileInfo);
+      if (fileInfo != nullptr) filePath = &(*fileInfo)[0];
       if (filePath != nullptr) {
         const char* file = filePath->c_str();
         ImGui::Text("File Choosen:\n%s", file);              // show choosen filepath
@@ -101,6 +103,10 @@ int main(int, char**) {
         show_another_window = false;
         filePath            = nullptr;
         fileLoad            = false;
+        fileInfo->pop_back();
+        fileInfo->pop_back();
+        fileInfo->pop_back();
+        fileInfo = nullptr;
       }
 
       if (ImGui::GetIO().KeyAlt) {

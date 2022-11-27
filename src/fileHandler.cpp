@@ -4,26 +4,36 @@
 
 FileHandler::FileHandler() { this->error = false; }
 
-std::string* FileHandler::drawGUI(std::string* fileP) {
+std::vector<std::string>* FileHandler::drawGUI(std::vector<std::string>* fileP) {
   // open Dialog Simple std::cout << fmt::format("DrawGUI");
   if (ImGui::Button("Open File Dialog")) {
     ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".csv,.txt", ".");
   }
+  static std::vector<std::string> fileInfo;
   static std::string filePathName;
   static std::string filePath;
+  static std::string fileName;
   // display
   if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey")) {
     // action if OK
     if (ImGuiFileDialog::Instance()->IsOk()) {
       filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
       filePath     = ImGuiFileDialog::Instance()->GetCurrentPath();
+      fileName     = filePathName.substr(filePath.length() + 1);
+
+      fileInfo.push_back(filePathName);
+      fileInfo.push_back(filePath);
+      fileInfo.push_back(fileName);
+
       // const char *fileP = filePathName.c_str();
       //  action
       //  ImGui::Text("%s", fileP);
-      //  std::cout << fmt::format("{}", filePathName) << std::endl;
+#ifndef NDEBUG
+      std::cout << fmt::format("{}", fileInfo[2]) << std::endl;
+#endif
       ImGuiFileDialog::Instance()->Close();
       if (ImGui::GetIO().KeyAlt) printf(""); // Set a debugger breakpoint here!
-      return &filePathName;
+      return &fileInfo;
     }
 
     // close
