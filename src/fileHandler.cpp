@@ -7,7 +7,7 @@ FileHandler::FileHandler() { this->error = false; }
 std::string* FileHandler::drawGUI(std::string* fileP) {
   // open Dialog Simple std::cout << fmt::format("DrawGUI");
   if (ImGui::Button("Open File Dialog")) {
-    ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".txt,.csv", ".");
+    ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".csv,.txt", ".");
   }
   static std::string filePathName;
   static std::string filePath;

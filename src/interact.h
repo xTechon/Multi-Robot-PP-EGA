@@ -10,8 +10,10 @@ class Interact {
   int bordery[5];
 
 public:
-  Interact(Grid* map);
-  void drawMapTest(); // draws a map onscreen using implots
-  void drawMapObs(Grid* map);
+  Interact(void);
+  void resizeBorder(Grid* map); // add a border to the grid
+  void clearBorder();           // resets border corners to 0
+  void addStartAndDest();       // allows the user to add start and end points
+  void drawMapObs(Grid* map);   // draws a loaded map to screen
 };
 #endif

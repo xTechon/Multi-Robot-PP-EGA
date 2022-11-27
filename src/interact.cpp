@@ -3,40 +3,6 @@
 #include "imgui.h"
 #include "implot.h"
 
-void Interact::drawMapTest() {
-  static int x[5], y[5];
-  x[0] = 1;
-  y[0] = 1;
-
-  x[1] = 10;
-  y[1] = 1;
-
-  x[2] = 10;
-  y[2] = 10;
-
-  x[3] = 1;
-  y[3] = 10;
-
-  x[4] = 1;
-  y[4] = 1;
-
-  static int xs[5], ys[5];
-  srand(0);
-  for (int i = 0; i < 5; i++) {
-    xs[i] = 1 + ((int) rand() % 9);
-    ys[i] = 1 + ((int) rand() % 9);
-  }
-  ImGui::Begin("Map Test"); // Start the window
-  if (ImPlot::BeginPlot("Map test")) {
-    ImPlot::SetupAxes("x", "y");
-    ImPlot::PlotLine("border", x, y, 5);
-    ImPlot::SetNextMarkerStyle(ImPlotMarker_Circle);
-    ImPlot::PlotScatter("Obstacle test", xs, ys, 5);
-    ImPlot::EndPlot();
-  }
-  ImGui::End();
-}
-
 void Interact::drawMapObs(Grid* map) {
   std::vector<int> x;
   std::vector<int> y;
@@ -54,30 +20,52 @@ void Interact::drawMapObs(Grid* map) {
     }
   }
 
-  ImGui::Begin("Imported Map");
+  static ImPlotLocation loc = ImPlotLocation_NorthWest;
+  // ImGui::Begin("Imported Map");
   if (ImPlot::BeginPlot("Imported Map")) {
+    ImPlotLegendFlags flags = ImPlotLegendFlags_None;
+    flags |= ImPlotLegendFlags_Outside;
+    ImPlot::SetupLegend(loc, flags);
     ImPlot::SetupAxes("x", "y");
+    ImPlot::SetNextLineStyle(ImVec4(1, 0, 0, 1)); // color is RGBA value
     ImPlot::PlotLine("border", this->borderx, this->bordery, 5);
     ImPlot::SetNextMarkerStyle(ImPlotMarker_Circle);
     ImPlot::PlotScatter("Obstacle", &x[0], &y[0], count);
     ImPlot::EndPlot();
-    ImGui::End();
+    // ImGui::End();
   }
 }
 
-Interact::Interact(Grid* map) {
+void Interact::resizeBorder(Grid* map) {
+  // bottom left corner
   this->borderx[0] = 0;
   this->bordery[0] = 0;
 
+  // bottom right corner
   this->borderx[1] = map->getWidth() - 1;
   this->bordery[1] = 0;
 
+  // top right corner
   this->borderx[2] = map->getWidth() - 1;
   this->bordery[2] = map->getHeight() - 1;
 
+  // top left corner
   this->borderx[3] = 0;
   this->bordery[3] = map->getHeight() - 1;
 
+  // back to bottom right corner
   this->borderx[4] = 0;
   this->bordery[4] = 0;
+}
+
+Interact::Interact() {
+  // initalize arrays with 0s
+  this->clearBorder();
+}
+
+void Interact::clearBorder() {
+  for (int i = 0; i < 5; i++) {
+    this->borderx[i] = 0;
+    this->bordery[i] = 0;
+  }
 }

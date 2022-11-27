@@ -55,7 +55,7 @@ int main(int, char**) {
   FileHandler* filePicker = new FileHandler();
   bool fileLoad           = false;
   Grid* terrain           = (Grid*) nullptr;
-  static Interact* plots  = (Interact*) nullptr;
+  Interact* plots         = new Interact();
 
   // Main window loop
   while (!glfwWindowShouldClose(window)) {
@@ -76,11 +76,11 @@ int main(int, char**) {
       filePath = filePicker->drawGUI(filePath);
       if (filePath != nullptr) {
         const char* file = filePath->c_str();
-        ImGui::Text("File Choosen:\n%s", file);               // show choosen filepath
-        terrain  = filePicker->importGrid(filePath, terrain); // load the terrain
-        plots    = new Interact(terrain);                     // initalize plots to generate a border
-        fileLoad = true;                                      // set safety variable for a loaded file
-        ImGui::Text("Terrain Loaded");                        // let user know terrain loaded
+        ImGui::Text("File Choosen:\n%s", file);              // show choosen filepath
+        terrain = filePicker->importGrid(filePath, terrain); // load the terrain
+        plots->resizeBorder(terrain);                        // add a border to the display
+        fileLoad = true;                                     // set safety variable for a loaded file
+        ImGui::Text("Terrain Loaded");                       // let user know terrain loaded
 
         if (ImGui::GetIO().KeyAlt) {
           printf(""); // Set a debugger breakpoint here!
@@ -94,9 +94,10 @@ int main(int, char**) {
       if (ImGui::Button("Reset Loaded Map")) {
         // free memory to load new map
         delete terrain;
-        delete plots;
+        plots->clearBorder(); // clear old border
+        // delete plots;
         terrain             = (Grid*) nullptr;
-        plots               = (Interact*) nullptr;
+        // plots               = (Interact*) nullptr;
         show_another_window = false;
         filePath            = nullptr;
         fileLoad            = false;
