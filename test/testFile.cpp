@@ -1,3 +1,4 @@
+#include "../src/debug.h" //already includes grid.h
 #include "../src/fileHandler.h"
 #include "test.h"
 
@@ -9,6 +10,10 @@ TEST_CASE("Test filepath") {
   exampleMap->setObstacle(2, 2);
   exampleMap->setObstacle(3, 3);
   exampleMap->setObstacle(0, 3);
+
+#ifndef NDBUG
+  printGraphObs(exampleMap);
+#endif
 
   Grid* fileImport = (Grid*) nullptr;
 
@@ -28,6 +33,9 @@ TEST_CASE("Test filepath") {
   // test a valid path
   SECTION("Test a valid path") { REQUIRE(fileImport != (Grid*) nullptr); }
 
+#ifndef NDEBUG
+  printGraphObs(fileImport);
+#endif
   // Test comparison works properly
   SECTION("Test map comparison works correctly") {
     // correct map

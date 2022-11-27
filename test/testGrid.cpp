@@ -1,4 +1,7 @@
-#include "../src/debug.h" //already includes grid.h
+#ifndef NDEBUG
+  #include "../src/debug.h" //already includes grid.h
+#endif
+#include "../src/grid.h"
 #include "test.h"
 
 TEST_CASE("Grid Class functions") {

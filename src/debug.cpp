@@ -1,4 +1,7 @@
+#include "debug.h"
+
 #include "EGA.h"
+#include "grid.h"
 
 void printGraphObs(Grid* grid) {
   for (int j = (grid->getHeight() - 1); j >= 0; j--) {
