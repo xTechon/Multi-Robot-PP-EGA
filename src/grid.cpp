@@ -91,3 +91,7 @@ std::string Grid::printVal(int x, int y, int z) {
   result = fmt::format("value at ({}, {}, {}): {}", x, y, z, this->map[x][y][z]);
   return result;
 }
+
+void Grid::setStart(int x, int y) { this->start = std::make_pair(x, y); }
+
+void Grid::setDest(int x, int y) { this->start = std::make_pair(x, y); }

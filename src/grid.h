@@ -23,7 +23,9 @@ public:
   int getPMV(int w, int h);
 
   std::pair<int, int> getStart();
+  void setStart(int x, int y);
   std::pair<int, int> getDest();
+  void setDest(int x, int y);
 
   void clearObstacles();                     // clears all obstacles in map
   void clearPMVs();                          // clears all the PMVs on the map

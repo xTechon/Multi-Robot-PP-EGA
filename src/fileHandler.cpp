@@ -63,7 +63,9 @@ Grid* FileHandler::importGrid(std::string* filePath, Grid* check) {
     return check; // check has already been set, just return it's value
   } else {
 #ifndef NDEBUG
+  #ifndef TESTS
     errorMsg(&(this->error));
+  #endif
     std::cout << fmt::format("FILE NOT FOUND") << std::endl;
 #endif
     return (Grid*) nullptr;
