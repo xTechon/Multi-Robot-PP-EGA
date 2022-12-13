@@ -16,7 +16,7 @@ set(SOURCES ${CPP_SOURCES})
 #check for libraries
 find_package(fmt REQUIRED)
 find_package(glfw3 REQUIRED)
-find_package(implot QUIET)
+#find_package(implot QUIET)
 #find_package(PkgConfig REQUIRED)
 #pkg_check_modules(FMT REQUIRED fmt)
 
