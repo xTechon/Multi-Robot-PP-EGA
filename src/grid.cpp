@@ -94,4 +94,4 @@ std::string Grid::printVal(int x, int y, int z) {
 
 void Grid::setStart(int x, int y) { this->start = std::make_pair(x, y); }
 
-void Grid::setDest(int x, int y) { this->start = std::make_pair(x, y); }
+void Grid::setDest(int x, int y) { this->dest = std::make_pair(x, y); }
