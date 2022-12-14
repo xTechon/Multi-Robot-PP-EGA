@@ -1,5 +1,7 @@
 #include "grid.h"
 
+#include <map>
+#include <queue>
 #include <random>
 #include <tuple>
 
