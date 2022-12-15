@@ -25,11 +25,10 @@ Dear ImGui is auto downloaded by the cmake file
 git clone https://github.com/xTechon/Multi-Robot-PP-EGA.git
 cd Multi-Robot-PP-EGA
 mkdir build
-cd build
-cmake ..
-cmake --build .
+cmake -S . -B build
+cmake --build build
 ```
-## Build Instructions (windows with vcpkg installed):
+## Build Instructions (windows with vcpkg installed) [Not Working]:
 ```
 git clone https://github.com/xTechon/Multi-Robot-PP-EGA.git
 cd Multi-Robot-PP-EGA
