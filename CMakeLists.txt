@@ -9,9 +9,6 @@ project(${PROJECT} LANGUAGES CXX)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
 
-# Get C or C++ sources in the current directory (only).
-file(GLOB CPP_SOURCES src/*.cpp)
-set(SOURCES ${CPP_SOURCES})
 
 # install libraries from vcpkg
 find_package(fmt REQUIRED)
@@ -29,6 +26,16 @@ set(LIBRARIES
     imgui::imgui
     implot::implot
 )
+
+# Add ImGuiFileDialog sources to project
+set(FileDialog
+    lib/ImGuiFileDialog/ImGuiFileDialog.h
+    lib/ImGuiFileDialog/ImGuiFileDialog.cpp
+)
+
+# Get C or C++ sources in the current directory (only).
+file(GLOB CPP_SOURCES src/*.cpp)
+set(SOURCES ${CPP_SOURCES} ${FIleDialog})
 
 #optional Catch2 for unit testing
 find_package(Catch2 3)
