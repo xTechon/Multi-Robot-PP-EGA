@@ -35,7 +35,7 @@ set(FileDialog
 
 # Get C or C++ sources in the current directory (only).
 file(GLOB CPP_SOURCES src/*.cpp)
-set(SOURCES ${CPP_SOURCES} ${FIleDialog})
+set(SOURCES ${CPP_SOURCES} ${FileDialog})
 
 #optional Catch2 for unit testing
 find_package(Catch2 3)
