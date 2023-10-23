@@ -2,10 +2,10 @@
     "name": "ega",
     "version-string": "0.1.0",
     "dependencies": [
-      "freetype",
       "fmt",
       "glfw3",
-      "catch2",
+      "freetype",
+      {"name": "imgui", "features": ["freetype", "glfw-binding", "opengl3-binding"]},
       "implot"
     ]
     
